@@ -1,0 +1,13 @@
+dist/
+node_modules/
+.openai/
+.env
+.env.*
+*.log
+*.tar.gz
+*.zip
+.DS_Store
+Thumbs.db
+personal-ai-atlas-backup-*.json
+personal-ai-atlas-results-*.json
+personal-ai-atlas-readable-answers-*.md

@@ -1,0 +1,15 @@
+{
+  "name": "personal-ai-atlas",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Choose the AI replies that feel right to you, one everyday situation at a time.",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node --test",
+    "start": "node scripts/preview.mjs"
+  }
+}

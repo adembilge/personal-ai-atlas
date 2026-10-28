@@ -1,0 +1,56 @@
+# Personal AI Atlas
+
+**Choose the replies that feel right to you.**
+
+Personal AI Atlas helps you explain how you would like an AI assistant to answer. Instead of asking you to describe your preferences from scratch, it shows familiar situations and a few short example replies.
+
+You might be sharing good news, choosing something to buy, asking for a simpler explanation, or having a difficult day. Pick the reply you would prefer.
+
+## Try it
+
+[Open Personal AI Atlas](https://adembilge.github.io/personal-ai-atlas/)
+
+There are **280 situations across 24 topics**. There are no right answers, and you do not need to finish in one sitting.
+
+## How to answer
+
+1. Choose any topic, or start at the beginning.
+2. Read the situation and select the reply you prefer.
+3. If needed, choose **Not sure**, **No preference**, **This doesn’t apply to me**, or write your own answer.
+4. Continue at your own pace. You can leave a question unanswered and change your answers later.
+
+## Save and come back
+
+Your answers save automatically in the browser you are using, when browser storage is available.
+
+Use **Save a backup** to download a file you can keep. To continue in another browser or on another device, open the website there and choose **Restore saved answers**.
+
+Backups are useful even if you stay on the same device: clearing browser data or using private browsing can remove saved progress. The website and the offline copy keep separate progress, so use a backup to move between them.
+
+## Use your results
+
+Open **Your results**, then choose **Download my results**. Attach that file to a ChatGPT conversation and ask:
+
+> Use these answers to write instructions for how you should reply to me.
+
+You can ask for a detailed guide and a shorter version to paste into ChatGPT’s Custom Instructions. Your answers can help distinguish your usual preferences from what you want in particular situations.
+
+The questionnaire does not change your ChatGPT settings automatically. Try the resulting instructions with real questions and adjust anything that does not feel right. Partial results are welcome too.
+
+## Prefer an offline copy?
+
+[Download the offline questionnaire](https://adembilge.github.io/personal-ai-atlas/Personal-AI-Atlas-offline.html), save the page, and open it in your browser. Everything needed to use it is included in that one file.
+
+You can also [read all the questions](https://adembilge.github.io/personal-ai-atlas/all-questions.md).
+
+## Your privacy
+
+Your responses stay in your browser. The application does not send them to an AI, keep them in an online account, or add them to this repository.
+
+Downloaded files contain your answers and anything you wrote. You decide whether and where to share them.
+
+This is a tool for exploring preferences, not a personality test or a promise of perfect AI answers.
+
+## Original question list
+
+The [original questions and answer choices](archive/questionnaire-v1-questions.md) are kept as a separate reading reference. They are not part of the application.
