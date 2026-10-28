@@ -48,9 +48,8 @@ function save() {
 function updateStatus() {
   const p = progress(BANK, profile),
     status = document.getElementById("save-status");
-  status.textContent = canSave
-    ? "Saved on this browser"
-    : "Download a backup to keep your answers";
+  status.hidden = canSave;
+  status.textContent = canSave ? "" : "Download a backup to keep your answers";
   status.title = saveProblem;
   document.getElementById("small-progress").textContent =
     p.recorded + " of " + p.total + " answered";
