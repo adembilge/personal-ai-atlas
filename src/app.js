@@ -142,9 +142,9 @@ function progressLine() {
 function homeScreen() {
   const p = progress(BANK, profile);
   main.innerHTML =
-    '<section class="hero"><div class="hero-copy"><span class="eyebrow">A LITTLE MORE YOU</span><h1>How would you like<br>your AI to reply?</h1><p class="intro">Good news, a difficult day, a quick question. Choose the replies that feel right to you, one everyday situation at a time.</p><div class="button-row"><button type="button" class="primary" id="begin">' +
+    '<section class="hero"><div class="hero-copy"><span class="eyebrow">Replies that feel like you</span><h1>Make your AI<br>a little more you.</h1><p class="intro">Good news, a difficult day, a quick question. Choose the replies that feel right to you, one everyday situation at a time.</p><div class="button-row"><button type="button" class="primary" id="begin">' +
     (p.recorded ? "Continue my questions" : "Let’s get started") +
-    ' <span aria-hidden="true">→</span></button><a class="plain-link" href="#/questions">Explore the topics</a></div><p class="gentle">No right answers. No need to finish in one sitting.</p></div><div class="sample-card" aria-label="An example question"><div class="sample-top"><span class="sample-dot"></span>A MOMENT YOU KNOW</div><p class="sample-situation">You say, “I passed<br>a difficult exam.”</p><p class="sample-question">Which reply feels closest?</p><div class="sample-reply"><span aria-hidden="true"></span>“Well done. What comes next?”</div><div class="sample-reply"><span aria-hidden="true"></span>“That is a real achievement after all that work.”</div><div class="sample-reply"><span aria-hidden="true"></span>“Great news! Take a moment to enjoy it.”</div><p class="sample-note">Just an example. Your answers start when you do.</p></div></section><section class="home-summary" aria-label="About the questionnaire"><div><strong>280</strong><span>everyday situations</span></div><div><strong>24</strong><span>familiar topics</span></div><div><strong>Your pace</strong><span>save and return anytime</span></div></section><section class="how"><div><span class="eyebrow">01 · CHOOSE</span><h2>Pick the reply you prefer.</h2><p>Read a short situation and compare the replies. If none feels right, you can write your own or leave it unanswered.</p></div><div><span class="eyebrow">02 · TAKE YOUR TIME</span><h2>A few questions is a start.</h2><p>Move between topics or come back another day. Your answers save in this browser. A backup lets you move to another device.</p></div><div><span class="eyebrow">03 · MAKE IT USEFUL</span><h2>Bring your answers to ChatGPT.</h2><p>Download your results and share the file in a chat. Ask for instructions that help the AI answer in a way that suits you.</p></div></section>' +
+    ' <span aria-hidden="true">→</span></button><a class="plain-link" href="#/questions">Explore the topics</a></div><p class="gentle">No right answers. No need to finish in one sitting.</p></div><div class="sample-card" aria-label="An example question"><div class="sample-top"><span class="sample-dot"></span>Try a familiar moment</div><p class="sample-situation">You say, “I passed a difficult exam.”</p><p class="sample-question">Which reply feels closest?</p><div class="sample-reply"><span aria-hidden="true"></span>“Well done. What comes next?”</div><div class="sample-reply"><span aria-hidden="true"></span>“That is a real achievement after all that work.”</div><div class="sample-reply"><span aria-hidden="true"></span>“Great news! Take a moment to enjoy it.”</div><p class="sample-note">Just an example. Your answers start when you do.</p></div></section><section class="home-summary" aria-label="About the questionnaire"><div><strong>280</strong><span>everyday situations</span></div><div><strong>24</strong><span>familiar topics</span></div><div><strong>Your pace</strong><span>save and return anytime</span></div></section><section class="how"><div><span class="eyebrow">Choose a reply</span><h2>Pick the reply you prefer.</h2><p>Read a short situation and compare the replies. If none feels right, you can write your own or leave it unanswered.</p></div><div><span class="eyebrow">Go at your pace</span><h2>A few questions is a start.</h2><p>Move between topics or come back another day. Your answers save in this browser. A backup lets you move to another device.</p></div><div><span class="eyebrow">Put it to use</span><h2>Bring your answers to ChatGPT.</h2><p>Download your results and share the file in a chat. Ask for instructions that help the AI answer in a way that suits you.</p></div></section>' +
     (p.recorded
       ? '<section class="resume-panel"><div><h2>Your answers are waiting.</h2>' +
         progressLine() +
@@ -156,7 +156,7 @@ function homeScreen() {
 }
 function topicsScreen() {
   main.innerHTML =
-    '<div class="page-heading"><div><span class="eyebrow">TAKE IT ONE TOPIC AT A TIME</span><h1>Everyday moments.<br>Your kind of answer.</h1><p class="intro">Start anywhere. Each topic has only the questions it needs.</p></div><button type="button" class="primary" id="resume">' +
+    '<div class="page-heading"><div><span class="eyebrow">Your topics</span><h1>Find your next topic.</h1><p class="intro">Start wherever you like. Pick a topic, answer a few, and come back anytime.</p></div><button type="button" class="primary" id="resume">' +
     (progress(BANK, profile).recorded
       ? "Continue where I left off"
       : "Start the questions") +
@@ -196,6 +196,9 @@ function showTopics(term) {
             '</span><span aria-hidden="true">→</span></a>',
         )
         .join("") +
+      (matches.length
+        ? ""
+        : '<p class="empty-state">No questions found. Try a different word, such as family or learning.</p>') +
       "</div>";
     return;
   }
@@ -243,7 +246,7 @@ function questionScreen(id) {
   profile.lastQuestion = q.id;
   save();
   main.innerHTML =
-    '<div class="question-layout"><aside class="question-aside"><a class="plain-link" href="#/questions">← All topics</a><span class="eyebrow">TOPIC ' +
+    '<div class="question-layout"><aside class="question-aside"><a class="plain-link" href="#/questions">← All topics</a><span class="eyebrow">Topic ' +
     String(BANK.sections.indexOf(section) + 1).padStart(2, "0") +
     "</span><h1>" +
     escapeHTML(section.title) +
@@ -255,9 +258,9 @@ function questionScreen(id) {
     (!canSave
       ? '<div class="note warning">' + escapeHTML(saveProblem) + "</div>"
       : "") +
-    '<article class="question-card"><div class="question-top"><span>QUESTION ' +
+    '<article class="question-card"><div class="question-top"><span>Question ' +
     (local + 1) +
-    " OF " +
+    " of " +
     section.questions.length +
     "</span><span>" +
     (index + 1) +
@@ -279,7 +282,7 @@ function questionScreen(id) {
           String.fromCharCode(65 + i) +
           '</span><span class="reply-text">“' +
           escapeHTML(c.text) +
-          "”</span></label>",
+          '”</span><svg class="reply-check" viewBox="0 0 20 20" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg></label>',
       )
       .join("") +
     '<div class="other-replies">' +
@@ -359,15 +362,15 @@ function questionScreen(id) {
 function resultsScreen() {
   const p = progress(BANK, profile);
   main.innerHTML =
-    '<div class="page-heading"><div><span class="eyebrow">A CLEARER PICTURE OF WHAT SUITS YOU</span><h1>Your answers,<br>ready to use.</h1><p class="intro">You do not need to finish every question. A few thoughtful answers can still be a useful starting point.</p></div></div><div class="results-stats"><div><strong>' +
+    '<div class="page-heading"><div><span class="eyebrow">Your results</span><h1>Your answers. Your way.</h1><p class="intro">You do not need to finish every question. A few thoughtful answers can still be a useful starting point.</p></div></div><div class="results-stats"><div><strong>' +
     p.recorded +
     "</strong><span>answered</span></div><div><strong>" +
     p.remaining +
     "</strong><span>left unanswered</span></div><div><strong>" +
     p.unsure +
-    '</strong><span>marked “Not sure”</span></div></div><section class="download-panel"><div><span class="eyebrow">THE NEXT STEP IS YOURS</span><h2>Make your results useful.</h2><p>Download your answers, then attach the file to a ChatGPT conversation. Ask: “Use these answers to write instructions for how you should reply to me.”</p><p class="small-copy">The results file includes the questions and your exact choices. It does not change any settings automatically.</p><div class="button-row"><button type="button" class="primary" id="results-download">Download my results <span aria-hidden="true">↓</span></button><button type="button" id="report-download">Get a readable copy</button></div></div><div class="download-side"><span aria-hidden="true">↗</span><p>Take your answers<br>into your next conversation.</p></div></section><div class="results-actions"><button type="button" id="backup-results">Save a backup</button><button type="button" id="restore-results">Restore saved answers</button><a href="#/questions" class="plain-link">Answer more questions →</a></div><div class="note"><b>Your privacy:</b> the file contains your answers and anything you wrote. Share it only when and where you choose. The website does not send your responses to an AI.</div><section class="review-section"><div class="review-heading"><h2>Look through your answers.</h2><p class="small-copy">Choose any question to change your reply.</p></div><div class="review-tools"><label class="field-label">Find an answer<input type="search" id="answer-search" placeholder="Search your questions or answers…" value="' +
+    '</strong><span>marked “Not sure”</span></div></div><section class="download-panel"><div><span class="eyebrow">Ready for your next conversation</span><h2>Help ChatGPT understand you.</h2><p>Download your answers, then attach the file to a ChatGPT conversation. Ask: “Use these answers to write instructions for how you should reply to me.”</p><p class="small-copy">The results file includes the questions and your exact choices. It does not change any settings automatically.</p><div class="button-row"><button type="button" class="primary" id="results-download">Download for ChatGPT <span aria-hidden="true">↓</span></button><button type="button" id="report-download">Download readable answers</button></div></div><div class="download-side"><span aria-hidden="true">↗</span><p>Take your answers<br>into your next conversation.</p></div></section><div class="results-actions"><button type="button" id="backup-results">Save a backup</button><button type="button" id="restore-results">Restore saved answers</button><a href="#/questions" class="plain-link">Answer more questions →</a></div><div class="note"><b>Your privacy:</b> the file contains your answers and anything you wrote. Share it only when and where you choose. The website does not send your responses to an AI.</div><section class="review-section"><div class="review-heading"><h2>Look through your answers.</h2><p class="small-copy">Choose any question to change your reply.</p></div><div class="review-tools"><label class="field-label" for="answer-search">Find an answer<input type="search" id="answer-search" placeholder="Search your questions or answers…" value="' +
     escapeHTML(resultSearch) +
-    '"></label><label class="field-label">Show<select id="answer-filter">' +
+    '"></label><label class="field-label" for="answer-filter">Show<select id="answer-filter">' +
     [
       ["all", "All questions"],
       ["recorded", "Answered"],
@@ -451,6 +454,9 @@ function showAnswers() {
         );
       })
       .join("") +
+    (matches.length
+      ? ""
+      : '<p class="empty-state">No answers match this search. Try another word or choose a different filter.</p>') +
     "</div>";
 }
 function render() {
@@ -477,6 +483,9 @@ function render() {
   else if (page === "questions") topicsScreen();
   else if (page === "results") resultsScreen();
   else homeScreen();
+  document.body.dataset.screen = route.startsWith("/question/")
+    ? "question"
+    : page;
   updateStatus();
   window.scrollTo(0, 0);
   main.focus({ preventScroll: true });

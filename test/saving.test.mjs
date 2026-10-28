@@ -40,6 +40,7 @@ function start(storage) {
     Error,
     SyntaxError,
     document: {
+      body: { dataset: {} },
       getElementById: element,
       querySelector: () => null,
       querySelectorAll: () => [],

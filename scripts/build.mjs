@@ -43,8 +43,20 @@ const script =
   "\n" +
   app +
   "\n})();";
+const appearance = fs.readFileSync(
+  path.join(root, "src", "appearance.js"),
+  "utf8",
+);
 const css = fs.readFileSync(path.join(root, "src", "styles.css"), "utf8"),
-  html = fs.readFileSync(path.join(root, "src", "index.html"), "utf8");
+  html = fs
+    .readFileSync(path.join(root, "src", "index.html"), "utf8")
+    .replace(
+      "<!-- appearance -->",
+      () => "<script>" + appearance + "</script>",
+    );
+fs.cpSync(path.join(root, "src", "assets"), path.join(dist, "assets"), {
+  recursive: true,
+});
 fs.writeFileSync(path.join(dist, "app.js"), script);
 fs.writeFileSync(path.join(dist, "styles.css"), css);
 fs.writeFileSync(path.join(dist, "index.html"), html);
@@ -73,15 +85,21 @@ const reference = [
   ]),
 ].join("\n");
 fs.writeFileSync(path.join(dist, "all-questions.md"), reference);
+const offlineCSS = css.replace(
+  /url\(["']\.\/assets\/dm-sans\.ttf["']\)/,
+  () =>
+    'url("data:font/ttf;base64,' +
+    fs
+      .readFileSync(path.join(root, "src", "assets", "dm-sans.ttf"))
+      .toString("base64") +
+    '")',
+);
 const offline = html
   .replace(
     /<link\s+rel="stylesheet"\s+href="\.\/styles\.css"\s*\/?>/,
-    () => "<style>" + css + "</style>",
+    () => "<style>" + offlineCSS + "</style>",
   )
-  .replace(
-    /<script\s+src="\.\/app\.js"\s+defer><\/script>/,
-    "",
-  )
+  .replace(/<script\s+src="\.\/app\.js"\s+defer><\/script>/, "")
   .replace(
     "</body>",
     () =>

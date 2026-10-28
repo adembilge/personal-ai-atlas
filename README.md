@@ -29,13 +29,19 @@ Backups are useful even if you stay on the same device: clearing browser data or
 
 ## Use your results
 
-Open **Your results**, then choose **Download my results**. Attach that file to a ChatGPT conversation and ask:
+Open **Your results**, then choose **Download for ChatGPT**. Attach that file to a ChatGPT conversation and ask:
 
 > Use these answers to write instructions for how you should reply to me.
 
 You can ask for a detailed guide and a shorter version to paste into ChatGPT’s Custom Instructions. Your answers can help distinguish your usual preferences from what you want in particular situations.
 
 The questionnaire does not change your ChatGPT settings automatically. Try the resulting instructions with real questions and adjust anything that does not feel right. Partial results are welcome too.
+
+Choose **Download readable answers** if you would like a copy to read yourself. **Save a backup** keeps a copy you can restore later.
+
+## Light or dark
+
+The website starts with your device’s preferred appearance. Use the sun or moon button at the top to switch between light and dark. Your choice is remembered in this browser.
 
 ## Prefer an offline copy?
 

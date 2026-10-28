@@ -14,4 +14,6 @@ Question content lives in `questions.txt`. Each section declares its question co
 
 The application, offline page, and readable question reference are generated together. After an edit, rebuild and run the tests. Check keyboard navigation, a narrow phone layout, backup and restore, unanswered navigation, and downloaded results before publishing.
 
+Appearance is independent of questionnaire answers. Keep the answer storage key and version-2 formats stable. The appearance script runs in the document head to avoid a theme flash; test both device-following and explicit choices. DM Sans is bundled under its accompanying SIL Open Font License in `src/assets/`, and the offline build embeds the font.
+
 GitHub Pages publishes the generated `dist/` directory through the repository workflow. All application asset links are relative so the site works under a repository path.

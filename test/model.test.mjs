@@ -177,11 +177,15 @@ test("Static and offline builds contain valid JavaScript and relative assets", (
   assert.ok(html.includes('href="./styles.css"'));
   assert.doesNotThrow(() => new vm.Script(js));
   const scripts = [...offline.matchAll(/<script>([\s\S]*?)<\/script>/g)];
-  assert.equal(scripts.length, 1);
-  assert.doesNotThrow(() => new vm.Script(scripts[0][1]));
+  assert.equal(scripts.length, 2);
+  for (const script of scripts)
+    assert.doesNotThrow(() => new vm.Script(script[1]));
   assert.ok(!offline.includes('src="./app.js"'));
   assert.ok(!offline.includes('href="./styles.css"'));
-  assert.ok(offline.indexOf('<script>') > offline.indexOf('</footer>'));
+  assert.ok(offline.lastIndexOf("<script>") > offline.indexOf("</footer>"));
+  assert.ok(offline.indexOf("<script>") < offline.indexOf("</head>"));
+  assert.ok(offline.includes("data:font/ttf;base64,"));
+  assert.ok(!offline.includes("url('./assets/"));
 });
 test("Removed features and specialist jargon are absent from the active application", () => {
   const app =
