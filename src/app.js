@@ -3,24 +3,10 @@ const QUESTION_MAP = new Map(QUESTIONS.map((q) => [q.id, q]));
 const STORAGE_KEY = "my-kind-of-ai:answers:3";
 try { localStorage.removeItem("personal-ai-atlas:answers:2"); } catch { /* Storage may be unavailable. */ }
 const main = document.getElementById("main");
-const FIELD_CONTOURS = `<svg class="field-contours" viewBox="0 0 560 520" fill="none" aria-hidden="true" focusable="false">
-  <g stroke="currentColor" stroke-width="1">
-    <path d="M-30 144C55 154 51 35 166 39s82 93 190 60 195 4 224 65"/>
-    <path d="M-30 164C63 179 68 57 168 61s85 96 197 61 182 3 215 65"/>
-    <path d="M-30 187C76 199 86 79 171 83s91 99 202 62 174 3 207 66"/>
-    <path d="M-30 210C85 218 100 103 174 106s91 104 206 64 162 8 200 65"/>
-    <path d="M-20 382C76 337 115 468 223 452s100-87 202-61 138-15 155-34"/>
-    <path d="M-20 405C70 360 119 491 227 475s101-88 202-63 133-12 151-29"/>
-    <path d="M-20 428C67 384 121 515 232 499s100-92 204-64 124-10 144-26"/>
-    <path d="M-20 451C63 408 125 540 237 523s100-94 206-64 115-6 137-26"/>
-  </g>
-</svg>`;
 let profile = freshProfile(BANK),
   canSave = true,
   saveProblem = "",
-  pendingRestore = null,
-  resultFilter = "all",
-  resultSearch = "";
+  pendingRestore = null;
 try {
   const saved = localStorage.getItem(STORAGE_KEY);
   if (saved) profile = validateProfile(BANK, JSON.parse(saved));
@@ -123,12 +109,12 @@ function downloadBackup() {
 }
 function downloadResults() {
   downloadFile(
-    datedName("results", "json"),
+    datedName("ai-profile", "json"),
     JSON.stringify(resultsFile(BANK, profile), null, 2),
     "application/json",
   );
   toast(
-    "Results download started. You can attach this file to a ChatGPT conversation.",
+    "Profile download started. Share it with an AI assistant or agent that supports file attachments.",
   );
 }
 function currentQuestion() {
@@ -155,17 +141,10 @@ function progressLine() {
 function homeScreen() {
   const p = progress(BANK, profile);
   main.innerHTML =
-    '<section class="hero"><div class="hero-copy"><span class="eyebrow">Replies that feel like you</span><h1>Make your AI<br>a little more you.</h1><p class="intro">Good news, a difficult day, a quick question. Explore your preferences and choose the responses that feel right to you.</p><div class="button-row"><button type="button" class="primary" id="begin">' +
+    '<section class="home-compact"><span class="eyebrow">Replies that feel like you</span><h1>Make your AI<br>a little more you.</h1><p class="intro">Choose how you want AI to respond, then use your profile with your preferred assistants and agents.</p><div class="button-row"><button type="button" class="primary" id="begin">' +
     (p.recorded ? "Continue my questions" : "Let’s get started") +
-    ' <span aria-hidden="true">→</span></button><a class="plain-link" href="#/questions">Explore the topics</a></div><p class="gentle">No right answers. No need to finish in one sitting.</p></div><div class="sample-wrap">' + FIELD_CONTOURS + '<div class="sample-card" aria-label="An example question"><div class="sample-top"><span class="sample-dot"></span>Try a familiar moment</div><p class="sample-situation">You tell the assistant: “I got the job!”</p><p class="sample-question">Which reply feels closest?</p><div class="sample-reply"><span aria-hidden="true"></span>“Congratulations. That is a significant result.”</div><div class="sample-reply"><span aria-hidden="true"></span>“Well done. When do you start?”</div><div class="sample-reply"><span aria-hidden="true"></span>“Congratulations. Enjoy the moment; we can deal with preparations whenever you are ready.”</div><p class="sample-note">Just an example. Your answers start when you do.</p></div></div></section><section class="home-summary" aria-label="About the questionnaire"><div><strong>48</strong><span>questions</span></div><div><strong>6</strong><span>stages</span></div><div><strong>Your pace</strong><span>save and return anytime</span></div></section><section class="how"><div><span class="eyebrow">Choose a reply</span><h2>Pick the reply you prefer.</h2><p>Choose your preferences and compare responses to everyday situations. If none feels right, you can write your own or leave it unanswered.</p></div><div><span class="eyebrow">Go at your pace</span><h2>A few questions is a start.</h2><p>Move between topics or come back another day. Your answers save in this browser. A backup lets you move to another device.</p></div><div><span class="eyebrow">Put it to use</span><h2>Bring your answers to ChatGPT.</h2><p>Download your results and share the file in a chat. Ask for instructions that help the AI answer in a way that suits you.</p></div></section>' +
-    (p.recorded
-      ? '<section class="resume-panel"><div><h2>Your answers are waiting.</h2>' +
-        progressLine() +
-        '</div><a class="plain-link" href="#/results">See my answers →</a></section>'
-      : "") +
-    '<div class="note"><b>You stay in control.</b> Nothing is selected for you. Your answers are not sent to an AI automatically, and this questionnaire does not change your ChatGPT settings.</div>';
-  document.getElementById("begin").onclick = () =>
-    navigate("#/question/" + currentQuestion().id);
+    ' <span aria-hidden="true">→</span></button><a class="plain-link" href="#/questions">Explore the stages</a></div><div class="home-summary" aria-label="About the questionnaire"><div><strong>48</strong><span>questions</span></div><div><strong>6</strong><span>stages</span></div><div><strong>Your pace</strong><span>answer when you like</span></div></div></section>';
+  document.getElementById("begin").onclick = () => navigate("#/question/" + currentQuestion().id);
 }
 function topicsScreen() {
   main.innerHTML =
@@ -327,7 +306,7 @@ function questionScreen(id) {
     '</span><button type="button" class="text-button" id="clear-answer">Clear my answer</button></div></article><div class="question-nav"><button type="button" id="previous" ' +
     (index === 0 ? "disabled" : "") +
     '>← Back</button><span>Choose what feels right.<br>Or continue without an answer.</span><button type="button" class="primary" id="next">' +
-    (index === QUESTIONS.length - 1 ? "See my results" : "Next") +
+    (index === QUESTIONS.length - 1 ? "See My AI Profile" : "Next") +
     " →</button></div></section></div>";
   document.querySelectorAll('input[name="reply"]').forEach(
     (input) =>
@@ -378,36 +357,13 @@ function questionScreen(id) {
 function resultsScreen() {
   const p = progress(BANK, profile);
   main.innerHTML =
-    '<div class="page-heading"><div><span class="eyebrow">Your results</span><h1>Your answers. Your way.</h1><p class="intro">You do not need to finish every question. A few thoughtful answers can still be a useful starting point.</p></div></div><div class="results-stats"><div><strong>' +
+    '<div class="page-heading"><div><span class="eyebrow">Your answers. Your way.</span><h1>My AI Profile</h1><p class="intro">You do not need to finish every question. A few thoughtful answers can still be a useful starting point.</p></div></div><div class="results-stats"><div><strong>' +
     p.recorded +
     "</strong><span>answered</span></div><div><strong>" +
     p.remaining +
     "</strong><span>left unanswered</span></div><div><strong>" +
     p.unsure +
-    '</strong><span>marked “Not sure”</span></div></div><section class="download-panel"><div><span class="eyebrow">Ready for your next conversation</span><h2>Help ChatGPT understand you.</h2><p>Download your answers, then attach the file to a ChatGPT conversation. Ask: “Use these answers to write instructions for how you should reply to me.”</p><p class="small-copy">The results file includes the questions and your exact choices. It does not change any settings automatically.</p><div class="button-row"><button type="button" class="primary" id="results-download">Download for ChatGPT <span aria-hidden="true">↓</span></button><button type="button" id="report-download">Download readable answers</button></div></div><div class="download-side"><span aria-hidden="true">↗</span><p>Take your answers<br>into your next conversation.</p></div></section><div class="results-actions"><button type="button" id="backup-results">Save a backup</button><button type="button" id="restore-results">Restore saved answers</button><a href="#/questions" class="plain-link">Answer more questions →</a></div><div class="note"><b>Your privacy:</b> the file contains your answers and anything you wrote. Share it only when and where you choose. The website does not send your responses to an AI.</div><section class="review-section"><div class="review-heading"><h2>Look through your answers.</h2><p class="small-copy">Choose any question to change your reply.</p></div><div class="review-tools"><label class="field-label" for="answer-search">Find an answer<input type="search" id="answer-search" placeholder="Search your questions or answers…" value="' +
-    escapeHTML(resultSearch) +
-    '"></label><label class="field-label" for="answer-filter">Show<select id="answer-filter">' +
-    [
-      ["all", "All questions"],
-      ["recorded", "Answered"],
-      ["remaining", "Unanswered"],
-      ["unsure", "Not sure"],
-      ["no_preference", "No preference"],
-      ["not_applicable", "Does not apply"],
-      ["written", "My own answers"],
-    ]
-      .map(
-        ([value, label]) =>
-          '<option value="' +
-          value +
-          '" ' +
-          (resultFilter === value ? "selected" : "") +
-          ">" +
-          label +
-          "</option>",
-      )
-      .join("") +
-    '</select></label></div><div id="answer-list"></div></section>';
+    '</strong><span>marked “Not sure”</span></div></div><section class="download-panel"><div><span class="eyebrow">Ready for your next conversation</span><h2>Help your AI understand you.</h2><p>Download your profile, then share the file with an AI assistant or agent that supports attachments. Ask: “Use these answers to write instructions for how you should reply to me.”</p><p class="small-copy">The profile file includes the questions and your exact choices. It does not change any settings automatically.</p><div class="button-row"><button type="button" class="primary" id="results-download">Download AI profile <span aria-hidden="true">↓</span></button><button type="button" id="report-download">Download readable answers</button></div></div><div class="download-side"><span aria-hidden="true">↗</span><p>Take your answers<br>into your next conversation.</p></div></section><div class="results-actions"><button type="button" id="backup-results">Save a backup</button><button type="button" id="restore-results">Restore saved answers</button><a href="#/questions" class="plain-link">Answer more questions →</a></div><div class="note"><b>Your privacy:</b> the file contains your answers and anything you wrote. Share it only when and where you choose. The website does not send your responses to an AI.</div>';
   document.getElementById("results-download").onclick = downloadResults;
   document.getElementById("report-download").onclick = () => {
     downloadFile(
@@ -420,60 +376,6 @@ function resultsScreen() {
   document.getElementById("backup-results").onclick = downloadBackup;
   document.getElementById("restore-results").onclick = () =>
     document.getElementById("restore-file").click();
-  document.getElementById("answer-search").oninput = (e) => {
-    resultSearch = e.target.value;
-    showAnswers();
-  };
-  document.getElementById("answer-filter").onchange = (e) => {
-    resultFilter = e.target.value;
-    showAnswers();
-  };
-  showAnswers();
-}
-function showAnswers() {
-  const query = resultSearch.toLowerCase(),
-    matches = QUESTIONS.filter((q) => {
-      const answer = profile.answers[q.id],
-        recorded = hasResponse(answer);
-      return (
-        (resultFilter === "all" ||
-          (resultFilter === "recorded" && recorded) ||
-          (resultFilter === "remaining" && !recorded) ||
-          answer?.status === resultFilter) &&
-        (!query ||
-          (q.situation + " " + responseText(q, answer))
-            .toLowerCase()
-            .includes(query))
-      );
-    });
-  document.getElementById("answer-list").innerHTML =
-    '<p class="small-copy">' +
-    matches.length +
-    ' questions shown</p><div class="answer-list">' +
-    matches
-      .map((q) => {
-        const answer = profile.answers[q.id];
-        return (
-          '<a class="answer-row" href="#/question/' +
-          q.id +
-          '"><div><span class="answer-number">' +
-          String(QUESTIONS.indexOf(q) + 1).padStart(3, "0") +
-          "</span><h3>" +
-          escapeHTML(q.situation) +
-          "</h3><p>" +
-          escapeHTML(responseText(q, answer)) +
-          '</p></div><span class="answer-badge">' +
-          escapeHTML(
-            hasResponse(answer) ? STATUS_LABELS[answer.status] : "Unanswered",
-          ) +
-          ' <span aria-hidden="true">↗</span></span></a>'
-        );
-      })
-      .join("") +
-    (matches.length
-      ? ""
-      : '<p class="empty-state">No answers match this search. Try another word or choose a different filter.</p>') +
-    "</div>";
 }
 function render() {
   const route = location.hash.replace(/^#/, "") || "/home";

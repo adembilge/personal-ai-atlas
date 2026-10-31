@@ -551,6 +551,29 @@ dialog .button-row { margin-bottom: 0; }
   .results-stats { gap: 8px; padding-inline: 12px; }
   .results-stats > div + div { padding-left: 8px; }
 }
+
+/* A compact landing page keeps the next step and privacy information in view. */
+body[data-screen="home"] main { min-height: 0; padding: 24px 0 28px; }
+.home-compact { max-width: 900px; }
+.home-compact > .eyebrow { color: var(--accent); }
+.home-compact h1 { margin: 12px 0 16px; font-size: clamp(38px, 4.5vw, 58px); line-height: 1.08; }
+.home-compact .intro { margin: 0; max-width: 680px; }
+.home-compact .button-row { margin: 22px 0 8px; }
+.home-compact .gentle { margin: 8px 0 0; }
+.home-compact .home-summary { margin: 20px 0 12px; padding: 14px 0; }
+.home-privacy { margin: 0; color: var(--muted); font-size: 13px; }
+body[data-screen="home"] footer { padding: 20px 0; }
+@media (max-width: 760px) {
+  body[data-screen="home"] main { padding: 12px 0 18px; }
+  .home-compact h1 { font-size: 36px; margin: 8px 0 10px; }
+  .home-compact .intro { line-height: 1.5; }
+  .home-compact .button-row { margin: 14px 0 4px; gap: 8px 14px; }
+  .home-compact .button-row .primary { padding-inline: 14px; }
+  .home-compact .home-summary { margin: 12px 0 0; padding: 10px 0; }
+  .home-compact .home-summary span { margin-top: 2px; }
+  body[data-screen="home"] footer { padding: 16px 0; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; scroll-behavior: auto !important; }
 }

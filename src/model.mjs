@@ -202,7 +202,7 @@ export function resultsFile(bank, profile, stamp = new Date().toISOString()) {
       purpose:
         "Use baseline selections and scenario responses as evidence of communication preferences. This is not a personality test.",
       instructions: [
-        "Create a detailed Personal AI Operating Protocol and compact ChatGPT Custom Instructions with character counts.",
+        "Create a detailed AI operating profile and a concise version suitable for the assistant or agent in use. Respect any applicable platform-specific length limits.",
         "Organize stable preferences and situation-specific behavior without adding a mode-configuration burden for the user.",
         "Refer to question IDs when explaining a preference. Infer only what the selected replies support.",
         "Unanswered, not sure, and not applicable do not establish preferences. No preference explicitly records no preference.",
@@ -223,7 +223,7 @@ export function readableReport(bank, profile) {
     "",
     `${p.recorded} of ${p.total} questions answered.`,
     "",
-    "Share the results JSON file with ChatGPT to help create instructions for how it should reply to you. No account settings have been changed.",
+    "Share the profile JSON file with an AI assistant or agent that supports attachments to help create instructions for how it should reply to you. No account settings have been changed.",
     "",
     ...bank.sections.flatMap((section) => [
       "## " + section.title,

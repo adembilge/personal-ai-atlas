@@ -27,15 +27,15 @@ Use **Save a backup** to download a file you can keep. To continue in another br
 
 Backups are useful even if you stay on the same device: clearing browser data or using private browsing can remove saved progress. The website and the offline copy keep separate progress, so use a backup to move between them.
 
-## Use your results
+## Use My AI Profile
 
-Open **Your results**, then choose **Download for ChatGPT**. Attach that file to a ChatGPT conversation and ask:
+Open **My AI Profile**, then choose **Download AI profile**. Attach the file in an AI assistant or agent that supports file uploads and ask:
 
 > Use these answers to write instructions for how you should reply to me.
 
-You can ask for a detailed guide and a shorter version to paste into ChatGPT’s Custom Instructions. Your answers can help distinguish your usual preferences from what you want in particular situations.
+You can ask for a detailed guide and a shorter version suited to your chosen assistant or agent. Your answers can help distinguish your usual preferences from what you want in particular situations.
 
-The questionnaire does not change your ChatGPT settings automatically. Try the resulting instructions with real questions and adjust anything that does not feel right. Partial results are welcome too.
+The questionnaire does not change any assistant or agent settings automatically. Try the resulting instructions with real questions and adjust anything that does not feel right. Partial results are welcome too.
 
 Choose **Download readable answers** if you would like a copy to read yourself. **Save a backup** keeps a copy you can restore later.
 
