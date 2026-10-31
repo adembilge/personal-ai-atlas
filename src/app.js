@@ -3,6 +3,18 @@ const QUESTION_MAP = new Map(QUESTIONS.map((q) => [q.id, q]));
 const STORAGE_KEY = "my-kind-of-ai:answers:3";
 try { localStorage.removeItem("personal-ai-atlas:answers:2"); } catch { /* Storage may be unavailable. */ }
 const main = document.getElementById("main");
+const FIELD_CONTOURS = `<svg class="field-contours" viewBox="0 0 560 520" fill="none" aria-hidden="true" focusable="false">
+  <g stroke="currentColor" stroke-width="1">
+    <path d="M-30 144C55 154 51 35 166 39s82 93 190 60 195 4 224 65"/>
+    <path d="M-30 164C63 179 68 57 168 61s85 96 197 61 182 3 215 65"/>
+    <path d="M-30 187C76 199 86 79 171 83s91 99 202 62 174 3 207 66"/>
+    <path d="M-30 210C85 218 100 103 174 106s91 104 206 64 162 8 200 65"/>
+    <path d="M-20 382C76 337 115 468 223 452s100-87 202-61 138-15 155-34"/>
+    <path d="M-20 405C70 360 119 491 227 475s101-88 202-63 133-12 151-29"/>
+    <path d="M-20 428C67 384 121 515 232 499s100-92 204-64 124-10 144-26"/>
+    <path d="M-20 451C63 408 125 540 237 523s100-94 206-64 115-6 137-26"/>
+  </g>
+</svg>`;
 let profile = freshProfile(BANK),
   canSave = true,
   saveProblem = "",
@@ -141,9 +153,9 @@ function progressLine() {
 function homeScreen() {
   const p = progress(BANK, profile);
   main.innerHTML =
-    '<section class="home-compact"><span class="eyebrow">Replies that feel like you</span><h1>Make your AI<br>a little more you.</h1><p class="intro">Choose how you want AI to respond, then use your profile with your preferred assistants and agents.</p><div class="button-row"><button type="button" class="primary" id="begin">' +
+    '<section class="home-compact"><div class="home-main"><div class="home-copy"><h1>Make your AI<br>a little more you.</h1><p class="intro">Choose how you want AI to respond, then use your profile with your preferred assistants and agents.</p><div class="button-row"><button type="button" class="primary" id="begin">' +
     (p.recorded ? "Continue my questions" : "Let’s get started") +
-    ' <span aria-hidden="true">→</span></button><a class="plain-link" href="#/questions">Explore the stages</a></div><div class="home-summary" aria-label="About the questionnaire"><div><strong>48</strong><span>questions</span></div><div><strong>6</strong><span>stages</span></div><div><strong>Your pace</strong><span>answer when you like</span></div></div></section>';
+    ' <span aria-hidden="true">→</span></button><a class="plain-link" href="#/questions">Explore the stages</a></div></div><div class="sample-wrap">' + FIELD_CONTOURS + '<div class="sample-card" aria-label="An example question"><div class="sample-top"><span class="sample-dot"></span>Try a familiar moment</div><p class="sample-situation">You tell the assistant: “I got the job!”</p><p class="sample-question">Which reply feels closest?</p><div class="sample-reply"><span aria-hidden="true"></span>“Congratulations. That is a significant result.”</div><div class="sample-reply"><span aria-hidden="true"></span>“Well done. When do you start?”</div><div class="sample-reply"><span aria-hidden="true"></span>“Congratulations. Enjoy the moment; we can deal with preparations whenever you are ready.”</div><p class="sample-note">Just an example. Your answers start when you do.</p></div></div></div><div class="home-summary" aria-label="About the questionnaire"><div><strong>48</strong><span>questions</span></div><div><strong>6</strong><span>stages</span></div><div><strong>Your pace</strong><span>answer when you like</span></div></div></section>';
   document.getElementById("begin").onclick = () => navigate("#/question/" + currentQuestion().id);
 }
 function topicsScreen() {
