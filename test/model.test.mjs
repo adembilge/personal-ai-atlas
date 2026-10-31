@@ -23,21 +23,20 @@ const bank = JSON.parse(
     ),
   ),
   questions = allQuestions(bank);
-test("280 distinct situations across the 24 agreed section sizes", () => {
-  assert.equal(allQuestions(validateBank(bank)).length, 280);
+test("48 questions across six stages", () => {
+  assert.equal(allQuestions(validateBank(bank)).length, 48);
   assert.deepEqual(
     bank.sections.map((s) => s.questions.length),
     EXPECTED_COUNTS,
   );
-  assert.equal(new Set(questions.map((q) => q.situation)).size, 280);
+  assert.equal(new Set(questions.map((q) => q.situation)).size, 48);
 });
-test("Each situation has three or four distinct short replies", () => {
+test("Every question has distinct choices and a valid selection type", () => {
   for (const q of questions) {
-    assert.ok(q.choices.length >= 3 && q.choices.length <= 4);
+    assert.ok(q.choices.length >= 3 && q.choices.length <= 10);
+    assert.ok(["single", "multi"].includes(q.type));
     assert.equal(new Set(q.choices.map((c) => c.text)).size, q.choices.length);
-    assert.ok(q.situation.split(/\s+/).length <= 40, q.id);
-    for (const c of q.choices)
-      assert.ok(c.text.split(/\s+/).length <= 45, q.id);
+
   }
 });
 test("Fresh profiles have no selected answers or inferred preferences", () => {
@@ -48,7 +47,7 @@ test("Fresh profiles have no selected answers or inferred preferences", () => {
     resultsFile(bank, p)
       .sections.flatMap((s) => s.questions)
       .filter((q) => q.response.status === "unanswered").length,
-    280,
+    48,
   );
 });
 test("Different non-choice responses stay distinct", () => {
@@ -66,7 +65,7 @@ test("Every reply round-trips with its exact wording and question", () => {
   for (const q of questions)
     for (const c of q.choices) {
       const p = freshProfile(bank);
-      p.answers[q.id] = { status: "choice", choiceId: c.id };
+      p.answers[q.id] = q.type === "multi" ? { status: "choice", choiceIds: [c.id] } : { status: "choice", choiceId: c.id };
       const restored = readSavedFile(
         bank,
         JSON.parse(JSON.stringify(backupFile(bank, p))),
@@ -74,14 +73,14 @@ test("Every reply round-trips with its exact wording and question", () => {
       assert.equal(responseText(q, restored.answers[q.id]), c.text);
     }
 });
-test("Full results can restore all 280 answers", () => {
+test("Full results can restore all 48 answers", () => {
   const p = freshProfile(bank);
   for (const q of questions)
-    p.answers[q.id] = { status: "choice", choiceId: q.choices[0].id };
+    p.answers[q.id] = q.type === "multi" ? { status: "choice", choiceIds: [q.choices[0].id, q.choices[1].id] } : { status: "choice", choiceId: q.choices[0].id };
   const file = resultsFile(bank, p),
     restored = readSavedFile(bank, JSON.parse(JSON.stringify(file)));
-  assert.equal(progress(bank, restored).recorded, 280);
-  assert.equal(file.sections.flatMap((s) => s.questions).length, 280);
+  assert.equal(progress(bank, restored).recorded, 48);
+  assert.equal(file.sections.flatMap((s) => s.questions).length, 48);
   assert.deepEqual(restored.answers, p.answers);
 });
 test("Written answers remain verbatim, and empty drafts remain unfinished", () => {
@@ -158,10 +157,10 @@ test("Export objects are snapshots and do not change when the profile changes", 
 });
 test("Readable reports contain all questions and actual answers", () => {
   const p = freshProfile(bank);
-  p.answers[questions[0].id] = { status: "choice", choiceId: "reply-1" };
+  p.answers[questions[0].id] = { status: "choice", choiceIds: ["choice-1", "choice-2"] };
   const report = readableReport(bank, p);
   assert.ok(report.includes(questions[0].choices[0].text));
-  assert.equal((report.match(/^### /gm) || []).length, 280);
+  assert.equal((report.match(/^### /gm) || []).length, 48);
 });
 test("Static and offline builds contain valid JavaScript and relative assets", () => {
   const html = fs.readFileSync(
@@ -209,4 +208,25 @@ test("Removed features and specialist jargon are absent from the active applicat
     ),
   );
   assert.ok(!/fetch\(|XMLHttpRequest|sendBeacon|clipboard/.test(app));
+});
+
+test("Baseline and scenario metadata and selection types are preserved", () => {
+  assert.equal(questions[0].id, "roles");
+  assert.equal(questions[0].number, "B01");
+  assert.equal(questions[0].type, "multi");
+  assert.equal(questions[17].id, "S2-01");
+  assert.equal(questions[17].measure, "conversation_continuity");
+  assert.equal(questions[17].source, "everyday/followup");
+  assert.equal(questions[47].id, "S6-05");
+  assert.equal(questions.filter(q => q.type === "multi").length, 11);
+});
+test("Multiple selections survive export, restore, and report", () => {
+  const p = freshProfile(bank), q = questions[0];
+  p.answers[q.id] = {status: "choice", choiceIds: [q.choices[0].id, q.choices[2].id]};
+  const restored = readSavedFile(bank, resultsFile(bank, p));
+  assert.deepEqual(restored.answers[q.id].choiceIds, p.answers[q.id].choiceIds);
+  assert.ok(readableReport(bank, restored).includes(q.choices[0].text));
+  assert.ok(readableReport(bank, restored).includes(q.choices[2].text));
+  assert.throws(() => validateProfile(bank, {...p, answers: {[q.id]: {status:"choice", choiceIds: []}}}));
+  assert.throws(() => readSavedFile(bank, {format:"personal-ai-atlas/backup", formatVersion:2, questionnaireVersion:"2.0.0", profile:p}));
 });

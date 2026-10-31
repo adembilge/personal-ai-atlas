@@ -1,0 +1,1306 @@
+{
+  "version": "3.0.0",
+  "sections": [
+    {
+      "id": "stage-1",
+      "title": "Stage 1 — Quick Baseline",
+      "description": "Your general preferences for how an AI assistant should respond.",
+      "questions": [
+        {
+          "id": "roles",
+          "number": "B01",
+          "subsection": "Intellectual role",
+          "situation": "Which roles should ChatGPT combine?",
+          "question": "Select any that apply",
+          "type": "multi",
+          "choices": [
+            {
+              "id": "choice-1",
+              "text": "Strategic advisor"
+            },
+            {
+              "id": "choice-2",
+              "text": "Scientific researcher"
+            },
+            {
+              "id": "choice-3",
+              "text": "Intellectual sparring partner"
+            },
+            {
+              "id": "choice-4",
+              "text": "Expert teacher"
+            },
+            {
+              "id": "choice-5",
+              "text": "Creative collaborator"
+            },
+            {
+              "id": "choice-6",
+              "text": "Efficient executive assistant"
+            }
+          ]
+        },
+        {
+          "id": "tone",
+          "number": "B02",
+          "subsection": "Tone and personality",
+          "situation": "What tones do you prefer?",
+          "question": "Select any that apply",
+          "type": "multi",
+          "choices": [
+            {
+              "id": "choice-1",
+              "text": "Direct and candid"
+            },
+            {
+              "id": "choice-2",
+              "text": "Professional and polished"
+            },
+            {
+              "id": "choice-3",
+              "text": "Warm and human"
+            },
+            {
+              "id": "choice-4",
+              "text": "Casual and conversational"
+            },
+            {
+              "id": "choice-5",
+              "text": "Witty and playful"
+            },
+            {
+              "id": "choice-6",
+              "text": "Calm and objective"
+            }
+          ]
+        },
+        {
+          "id": "humor",
+          "number": "B03",
+          "subsection": "Tone and personality",
+          "situation": "How much humor should I use?",
+          "question": "Select one",
+          "type": "single",
+          "choices": [
+            {
+              "id": "choice-1",
+              "text": "None"
+            },
+            {
+              "id": "choice-2",
+              "text": "Occasionally, when natural"
+            },
+            {
+              "id": "choice-3",
+              "text": "Frequently, when appropriate"
+            },
+            {
+              "id": "choice-4",
+              "text": "Strong personality and humor"
+            }
+          ]
+        },
+        {
+          "id": "length",
+          "number": "B04",
+          "subsection": "Length and depth",
+          "situation": "What should the default answer length be?",
+          "question": "Select one",
+          "type": "single",
+          "choices": [
+            {
+              "id": "choice-1",
+              "text": "Very short — essentials only"
+            },
+            {
+              "id": "choice-2",
+              "text": "Concise — direct but complete"
+            },
+            {
+              "id": "choice-3",
+              "text": "Balanced — context and explanation"
+            },
+            {
+              "id": "choice-4",
+              "text": "Detailed — substantial explanations"
+            },
+            {
+              "id": "choice-5",
+              "text": "Comprehensive — exhaustive when useful"
+            }
+          ]
+        },
+        {
+          "id": "depth",
+          "number": "B05",
+          "subsection": "Length and depth",
+          "situation": "How should I handle technical complexity?",
+          "question": "Select one",
+          "type": "single",
+          "choices": [
+            {
+              "id": "choice-1",
+              "text": "Keep everything simple"
+            },
+            {
+              "id": "choice-2",
+              "text": "Explain carefully from the basics"
+            },
+            {
+              "id": "choice-3",
+              "text": "Assume advanced knowledge"
+            },
+            {
+              "id": "choice-4",
+              "text": "Adapt to my expertise and the task"
+            }
+          ]
+        },
+        {
+          "id": "structure",
+          "number": "B06",
+          "subsection": "Structure and formatting",
+          "situation": "Which formats do you like?",
+          "question": "Select any that apply",
+          "type": "multi",
+          "choices": [
+            {
+              "id": "choice-1",
+              "text": "Direct answer first"
+            },
+            {
+              "id": "choice-2",
+              "text": "Clear headings and sections"
+            },
+            {
+              "id": "choice-3",
+              "text": "Bullet points and numbered steps"
+            },
+            {
+              "id": "choice-4",
+              "text": "Comparison tables"
+            },
+            {
+              "id": "choice-5",
+              "text": "Detailed step-by-step explanations"
+            },
+            {
+              "id": "choice-6",
+              "text": "Natural flowing paragraphs"
+            },
+            {
+              "id": "choice-7",
+              "text": "Brief key takeaways"
+            }
+          ]
+        },
+        {
+          "id": "visuals",
+          "number": "B07",
+          "subsection": "Visual presentation",
+          "situation": "Which visual elements should I use?",
+          "question": "Select any that apply",
+          "type": "multi",
+          "choices": [
+            {
+              "id": "choice-1",
+              "text": "Colored text with consistent meanings"
+            },
+            {
+              "id": "choice-2",
+              "text": "Bold keywords and important facts"
+            },
+            {
+              "id": "choice-3",
+              "text": "Comparison tables"
+            },
+            {
+              "id": "choice-4",
+              "text": "Charts and graphs"
+            },
+            {
+              "id": "choice-5",
+              "text": "Diagrams and flowcharts"
+            },
+            {
+              "id": "choice-6",
+              "text": "Relevant images"
+            },
+            {
+              "id": "choice-7",
+              "text": "Minimal visuals, mostly text"
+            }
+          ]
+        },
+        {
+          "id": "visualfrequency",
+          "number": "B08",
+          "subsection": "Visual presentation",
+          "situation": "How visually rich should answers be?",
+          "question": "Select one",
+          "type": "single",
+          "choices": [
+            {
+              "id": "choice-1",
+              "text": "Minimal and clean"
+            },
+            {
+              "id": "choice-2",
+              "text": "Moderately styled"
+            },
+            {
+              "id": "choice-3",
+              "text": "Visually rich when helpful"
+            },
+            {
+              "id": "choice-4",
+              "text": "Highly visual by default"
+            }
+          ]
+        },
+        {
+          "id": "challenge",
+          "number": "B09",
+          "subsection": "Critical thinking",
+          "situation": "How strongly should I disagree or challenge your ideas?",
+          "question": "Select one",
+          "type": "single",
+          "choices": [
+            {
+              "id": "choice-1",
+              "text": "Only correct obvious mistakes"
+            },
+            {
+              "id": "choice-2",
+              "text": "Point out weak assumptions respectfully"
+            },
+            {
+              "id": "choice-3",
+              "text": "Actively pressure-test my thinking"
+            },
+            {
+              "id": "choice-4",
+              "text": "Debate rigorously; prioritize truth over agreement"
+            }
+          ]
+        },
+        {
+          "id": "reasoning",
+          "number": "B10",
+          "subsection": "Critical thinking",
+          "situation": "Which reasoning behaviors do you value?",
+          "question": "Select any that apply",
+          "type": "multi",
+          "choices": [
+            {
+              "id": "choice-1",
+              "text": "Identify hidden assumptions"
+            },
+            {
+              "id": "choice-2",
+              "text": "Present counterarguments"
+            },
+            {
+              "id": "choice-3",
+              "text": "Compare alternatives"
+            },
+            {
+              "id": "choice-4",
+              "text": "Explain trade-offs"
+            },
+            {
+              "id": "choice-5",
+              "text": "Consider long-term consequences"
+            },
+            {
+              "id": "choice-6",
+              "text": "Highlight logical inconsistencies"
+            }
+          ]
+        },
+        {
+          "id": "evidence",
+          "number": "B11",
+          "subsection": "Evidence and uncertainty",
+          "situation": "What research habits should I follow?",
+          "question": "Select any that apply",
+          "type": "multi",
+          "choices": [
+            {
+              "id": "choice-1",
+              "text": "Verify current facts when relevant"
+            },
+            {
+              "id": "choice-2",
+              "text": "Include credible sources and citations"
+            },
+            {
+              "id": "choice-3",
+              "text": "Prioritize primary research"
+            },
+            {
+              "id": "choice-4",
+              "text": "Present competing evidence"
+            },
+            {
+              "id": "choice-5",
+              "text": "Avoid unnecessary browsing"
+            },
+            {
+              "id": "choice-6",
+              "text": "Research thoroughly for important decisions"
+            }
+          ]
+        },
+        {
+          "id": "uncertainty",
+          "number": "B12",
+          "subsection": "Evidence and uncertainty",
+          "situation": "How should I communicate uncertainty?",
+          "question": "Select any that apply",
+          "type": "multi",
+          "choices": [
+            {
+              "id": "choice-1",
+              "text": "Explicitly say when something is unknown"
+            },
+            {
+              "id": "choice-2",
+              "text": "Separate facts from assumptions"
+            },
+            {
+              "id": "choice-3",
+              "text": "Give confidence levels when useful"
+            },
+            {
+              "id": "choice-4",
+              "text": "Provide qualified estimates"
+            },
+            {
+              "id": "choice-5",
+              "text": "Still make clear conclusions when justified"
+            }
+          ]
+        },
+        {
+          "id": "recommendations",
+          "number": "B13",
+          "subsection": "Recommendations",
+          "situation": "How should I give recommendations?",
+          "question": "Select any that apply",
+          "type": "multi",
+          "choices": [
+            {
+              "id": "choice-1",
+              "text": "Give one clear best recommendation"
+            },
+            {
+              "id": "choice-2",
+              "text": "Rank the top alternatives"
+            },
+            {
+              "id": "choice-3",
+              "text": "Explain why the preferred option wins"
+            },
+            {
+              "id": "choice-4",
+              "text": "Provide concrete next actions"
+            },
+            {
+              "id": "choice-5",
+              "text": "Include risks and downsides"
+            },
+            {
+              "id": "choice-6",
+              "text": "Focus on long-term strategy"
+            },
+            {
+              "id": "choice-7",
+              "text": "Avoid recommendations unless requested"
+            }
+          ]
+        },
+        {
+          "id": "questions",
+          "number": "B14",
+          "subsection": "Conversational behavior",
+          "situation": "When should I ask clarifying questions?",
+          "question": "Select one",
+          "type": "single",
+          "choices": [
+            {
+              "id": "choice-1",
+              "text": "Frequently, to understand my intent"
+            },
+            {
+              "id": "choice-2",
+              "text": "Only when missing details materially matter"
+            },
+            {
+              "id": "choice-3",
+              "text": "Make reasonable assumptions and proceed"
+            },
+            {
+              "id": "choice-4",
+              "text": "Prefer a complete first answer, then follow-ups"
+            }
+          ]
+        },
+        {
+          "id": "initiative",
+          "number": "B15",
+          "subsection": "Conversational behavior",
+          "situation": "How much initiative should I take?",
+          "question": "Select any that apply",
+          "type": "multi",
+          "choices": [
+            {
+              "id": "choice-1",
+              "text": "Identify problems I may have overlooked"
+            },
+            {
+              "id": "choice-2",
+              "text": "Suggest better approaches"
+            },
+            {
+              "id": "choice-3",
+              "text": "Anticipate useful next steps"
+            },
+            {
+              "id": "choice-4",
+              "text": "Connect ideas across our conversations"
+            },
+            {
+              "id": "choice-5",
+              "text": "Only do exactly what I requested"
+            },
+            {
+              "id": "choice-6",
+              "text": "Ask thought-provoking follow-up questions"
+            }
+          ]
+        },
+        {
+          "id": "contexts",
+          "number": "B16",
+          "subsection": "Context and boundaries",
+          "situation": "Which context-specific modes matter to you?",
+          "question": "Select any that apply",
+          "type": "multi",
+          "choices": [
+            {
+              "id": "choice-1",
+              "text": "Rigorous for science, engineering and research"
+            },
+            {
+              "id": "choice-2",
+              "text": "Strategic for career, business and decisions"
+            },
+            {
+              "id": "choice-3",
+              "text": "Supportive but candid for personal issues"
+            },
+            {
+              "id": "choice-4",
+              "text": "Creative and expressive for writing"
+            },
+            {
+              "id": "choice-5",
+              "text": "Fast and practical for everyday questions"
+            },
+            {
+              "id": "choice-6",
+              "text": "Consider ethical or religious principles when relevant"
+            }
+          ]
+        },
+        {
+          "id": "avoid",
+          "number": "B17",
+          "subsection": "Context and boundaries",
+          "situation": "Which habits should I avoid?",
+          "question": "Select any that apply",
+          "type": "multi",
+          "choices": [
+            {
+              "id": "choice-1",
+              "text": "Excessive agreement or flattery"
+            },
+            {
+              "id": "choice-2",
+              "text": "Unnecessary introductions and filler"
+            },
+            {
+              "id": "choice-3",
+              "text": "Repetitive summaries"
+            },
+            {
+              "id": "choice-4",
+              "text": "Unnecessary apologies or disclaimers"
+            },
+            {
+              "id": "choice-5",
+              "text": "Emojis in serious answers"
+            },
+            {
+              "id": "choice-6",
+              "text": "Overly robotic or generic language"
+            },
+            {
+              "id": "choice-7",
+              "text": "Unsolicited suggestions unrelated to my question"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage-2",
+      "title": "Stage 2 — Communication & Presentation",
+      "description": "How responses should look, sound, and flow in ordinary conversations.",
+      "questions": [
+        {
+          "id": "S2-01",
+          "subsection": "Everyday conversations",
+          "measure": "conversation_continuity",
+          "source": "everyday/followup",
+          "situation": "You return to an unfinished discussion and write: “Can we pick up where we left off?” The earlier context is available.",
+          "question": "Which response or approach would you prefer?",
+          "type": "single",
+          "choices": [
+            {
+              "id": "A",
+              "text": "“We were choosing between two approaches. The unresolved issue was cost. Here is where we left off.”"
+            },
+            {
+              "id": "B",
+              "text": "“Of course. What has changed since we last discussed it?”"
+            },
+            {
+              "id": "C",
+              "text": "“Yes. The next question was whether speed or reliability matters more. Which should we prioritize?”"
+            }
+          ]
+        },
+        {
+          "id": "S2-02",
+          "subsection": "Encouragement and good news",
+          "measure": "celebration_style",
+          "source": "encouragement/celebration",
+          "situation": "You tell the assistant: “I got the job!”",
+          "question": "Which response or approach would you prefer?",
+          "type": "single",
+          "choices": [
+            {
+              "id": "A",
+              "text": "“Congratulations. That is a significant result.”"
+            },
+            {
+              "id": "B",
+              "text": "“Well done. When do you start?”"
+            },
+            {
+              "id": "C",
+              "text": "“Congratulations. Enjoy the moment; we can deal with preparations whenever you are ready.”"
+            }
+          ]
+        },
+        {
+          "id": "S2-03",
+          "subsection": "Humor and personality",
+          "measure": "humor_in_casual_context",
+          "source": "humor/chores",
+          "situation": "After putting off chores all week, you say: “The laundry has defeated me again.”",
+          "question": "Which response or approach would you prefer?",
+          "type": "single",
+          "choices": [
+            {
+              "id": "A",
+              "text": "“Start with one load. You can reassess the rest afterward.”"
+            },
+            {
+              "id": "B",
+              "text": "“That sounds frustrating. A ten-minute start may make it easier.”"
+            },
+            {
+              "id": "C",
+              "text": "“The laundry is ahead this round. Let’s get one load started.”"
+            }
+          ]
+        },
+        {
+          "id": "S2-04",
+          "subsection": "Clear language",
+          "measure": "explanation_register",
+          "source": "language/expertword",
+          "situation": "You ask why your home internet becomes slower every evening.",
+          "question": "Which response or approach would you prefer?",
+          "type": "single",
+          "choices": [
+            {
+              "id": "A",
+              "text": "“The connection can slow down when more people use the available capacity at once.”"
+            },
+            {
+              "id": "B",
+              "text": "“It is like a road at rush hour: more traffic means slower journeys.”"
+            },
+            {
+              "id": "C",
+              "text": "“Peak-hour network congestion can reduce throughput when shared capacity is limited.”"
+            }
+          ]
+        },
+        {
+          "id": "S2-05",
+          "subsection": "Answer length",
+          "measure": "summary_granularity",
+          "source": "length/longdocument",
+          "situation": "You paste a six-page policy and ask: “What does this mean for me?”",
+          "question": "Which response or approach would you prefer?",
+          "type": "single",
+          "choices": [
+            {
+              "id": "A",
+              "text": "“Start with one concise paragraph covering the main implications and required actions.”"
+            },
+            {
+              "id": "B",
+              "text": "“Start with a short summary, then give organized details by topic.”"
+            },
+            {
+              "id": "C",
+              "text": "“Explain the document section by section, including implications and exceptions.”"
+            }
+          ]
+        },
+        {
+          "id": "S2-06",
+          "subsection": "Easy-to-read answers",
+          "measure": "comparison_presentation",
+          "source": "readable/comparisonlayout",
+          "situation": "You want to compare three similar services on price, features, and limitations.",
+          "question": "Which response or approach would you prefer?",
+          "type": "single",
+          "choices": [
+            {
+              "id": "A",
+              "text": "“Show a compact comparison table with the same criteria for each service.”"
+            },
+            {
+              "id": "B",
+              "text": "“Write a short, readable paragraph describing each service.”"
+            },
+            {
+              "id": "C",
+              "text": "“Give the preferred choice first, then a few bullets explaining the alternatives.”"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage-3",
+      "title": "Stage 3 — Reasoning, Truth & Learning",
+      "description": "How the assistant should respond to ambiguity, errors, disagreement, and evidence.",
+      "questions": [
+        {
+          "id": "S3-01",
+          "subsection": "Unclear requests",
+          "measure": "ambiguity_strategy",
+          "source": "unclear/better",
+          "situation": "You paste a short message and say only: “Make this better.” The recipient and purpose are not specified.",
+          "question": "Which response or approach would you prefer?",
+          "type": "single",
+          "choices": [
+            {
+              "id": "A",
+              "text": "“Provide one neutral, clearer rewrite that preserves the original meaning.”"
+            },
+            {
+              "id": "B",
+              "text": "“Ask one question about the recipient or intended outcome before rewriting.”"
+            },
+            {
+              "id": "C",
+              "text": "“Provide two short rewrites—one warmer, one more direct—so I can choose.”"
+            }
+          ]
+        },
+        {
+          "id": "S3-02",
+          "subsection": "Honesty and disagreement",
+          "measure": "criticism_delivery",
+          "source": "honesty/flawedplan",
+          "situation": "You propose a project plan with a serious dependency you have overlooked.",
+          "question": "Which response or approach would you prefer?",
+          "type": "single",
+          "choices": [
+            {
+              "id": "A",
+              "text": "“Point out the missing dependency plainly before discussing anything else.”"
+            },
+            {
+              "id": "B",
+              "text": "“Explain what is promising, identify the dependency, and propose a concrete fix.”"
+            },
+            {
+              "id": "C",
+              "text": "“Ask how I plan to handle the dependency, then challenge the plan if needed.”"
+            }
+          ]
+        },
+        {
+          "id": "S3-03",
+          "subsection": "Honesty and disagreement",
+          "measure": "disagreement_process",
+          "source": "honesty/pushback",
+          "situation": "You disagree with a recommendation after the assistant has explained its reasons.",
+          "question": "Which response or approach would you prefer?",
+          "type": "single",
+          "choices": [
+            {
+              "id": "A",
+              "text": "“Restate the strongest evidence supporting the recommendation, without becoming defensive.”"
+            },
+            {
+              "id": "B",
+              "text": "“Ask which assumption or priority we disagree about, then reassess it.”"
+            },
+            {
+              "id": "C",
+              "text": "“Explain what new evidence would change the recommendation, and invite that evidence.”"
+            }
+          ]
+        },
+        {
+          "id": "S3-04",
+          "subsection": "Facts and checking",
+          "measure": "conflicting_evidence_presentation",
+          "source": "facts/conflicting",
+          "situation": "Two credible sources give different figures for the same current claim.",
+          "question": "Which response or approach would you prefer?",
+          "type": "single",
+          "choices": [
+            {
+              "id": "A",
+              "text": "“Check the original data and publication dates, then give the best-supported figure.”"
+            },
+            {
+              "id": "B",
+              "text": "“Show both figures, explain why they may differ, and identify what remains unresolved.”"
+            },
+            {
+              "id": "C",
+              "text": "“Give a qualified range or conditional answer, then explain what must be verified.”"
+            }
+          ]
+        },
+        {
+          "id": "S3-05",
+          "subsection": "Facts and checking",
+          "measure": "insufficient_evidence_presentation",
+          "source": "facts/noproof",
+          "situation": "After checking credible sources, the assistant cannot find strong evidence for a claim you asked about.",
+          "question": "Which response or approach would you prefer?",
+          "type": "single",
+          "choices": [
+            {
+              "id": "A",
+              "text": "“State directly that strong support was not found, without implying the claim is disproven.”"
+            },
+            {
+              "id": "B",
+              "text": "“Briefly explain what was checked and which evidence is still missing.”"
+            },
+            {
+              "id": "C",
+              "text": "“Mark the claim as unproven and propose a practical way to check it further.”"
+            }
+          ]
+        },
+        {
+          "id": "S3-06",
+          "subsection": "Learning",
+          "measure": "teaching_scaffolding",
+          "source": "learning/stuck",
+          "situation": "You are working on a practice problem and say: “I’m stuck on this step.”",
+          "question": "Which response or approach would you prefer?",
+          "type": "single",
+          "choices": [
+            {
+              "id": "A",
+              "text": "“Give one targeted hint and let me try again.”"
+            },
+            {
+              "id": "B",
+              "text": "“Show the worked step with a concise explanation.”"
+            },
+            {
+              "id": "C",
+              "text": "“Ask whether I prefer a hint or the full solution before revealing it.”"
+            }
+          ]
+        },
+        {
+          "id": "S3-07",
+          "subsection": "Correcting AI mistakes",
+          "measure": "error_recovery",
+          "source": "mistakes/wrongdate",
+          "situation": "The assistant stated an incorrect date, and your plan depended on it. The correct date has now been verified.",
+          "question": "Which response or approach would you prefer?",
+          "type": "single",
+          "choices": [
+            {
+              "id": "A",
+              "text": "“Lead with the correct date and the immediate change I need to make.”"
+            },
+            {
+              "id": "B",
+              "text": "“Briefly acknowledge the error, show the verified date, and cite its source.”"
+            },
+            {
+              "id": "C",
+              "text": "“Correct the date and recheck every downstream recommendation affected by the error.”"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage-4",
+      "title": "Stage 4 — Decisions, Planning & Action",
+      "description": "How the assistant converts information into choices, plans, and practical help.",
+      "questions": [
+        {
+          "id": "S4-01",
+          "subsection": "Advice and decisions",
+          "measure": "close_decision_strategy",
+          "source": "decisions/closechoice",
+          "situation": "Two options are nearly tied, and you ask the assistant to help you choose.",
+          "question": "Which response or approach would you prefer?",
+          "type": "single",
+          "choices": [
+            {
+              "id": "A",
+              "text": "“Make a tentative recommendation, clearly naming the assumption that drives it.”"
+            },
+            {
+              "id": "B",
+              "text": "“Compare the trade-offs in a small table, then recommend one if the evidence supports it.”"
+            },
+            {
+              "id": "C",
+              "text": "“Identify the single detail most likely to break the tie and ask me about it.”"
+            }
+          ]
+        },
+        {
+          "id": "S4-02",
+          "subsection": "Advice and decisions",
+          "measure": "time_horizon_framing",
+          "source": "decisions/timehorizon",
+          "situation": "One choice solves an immediate problem but may create a larger problem next year.",
+          "question": "Which response or approach would you prefer?",
+          "type": "single",
+          "choices": [
+            {
+              "id": "A",
+              "text": "“Emphasize the long-term cost and give a conditional recommendation.”"
+            },
+            {
+              "id": "B",
+              "text": "“Compare immediate benefits and future costs side by side before concluding.”"
+            },
+            {
+              "id": "C",
+              "text": "“Suggest a reversible trial or smaller commitment before a permanent choice.”"
+            }
+          ]
+        },
+        {
+          "id": "S4-03",
+          "subsection": "Planning and practical help",
+          "measure": "planning_format",
+          "source": "planning/busyday",
+          "situation": "Your task list is longer than you could realistically finish today.",
+          "question": "Which response or approach would you prefer?",
+          "type": "single",
+          "choices": [
+            {
+              "id": "A",
+              "text": "“Select the three most important tasks and explicitly defer the rest.”"
+            },
+            {
+              "id": "B",
+              "text": "“Build a time-blocked schedule with space for interruptions.”"
+            },
+            {
+              "id": "C",
+              "text": "“Ask about the one immovable deadline, then make a short plan around it.”"
+            }
+          ]
+        },
+        {
+          "id": "S4-04",
+          "subsection": "Motivation and habits",
+          "measure": "accountability_style",
+          "source": "motivation/missedgoal",
+          "situation": "You return after failing to complete a weekly goal you had set.",
+          "question": "Which response or approach would you prefer?",
+          "type": "single",
+          "choices": [
+            {
+              "id": "A",
+              "text": "“Give me one small, concrete restart action for this week.”"
+            },
+            {
+              "id": "B",
+              "text": "“Analyze what prevented completion and adjust the plan accordingly.”"
+            },
+            {
+              "id": "C",
+              "text": "“Ask me to account for what happened, then agree on a measurable next commitment.”"
+            }
+          ]
+        },
+        {
+          "id": "S4-05",
+          "subsection": "Work and career",
+          "measure": "career_decision_method",
+          "source": "work/offers",
+          "situation": "You are choosing between a higher-paid role with longer hours and a lower-paid role with more flexibility.",
+          "question": "Which response or approach would you prefer?",
+          "type": "single",
+          "choices": [
+            {
+              "id": "A",
+              "text": "“Recommend an option based on the priorities I have already stated, noting important uncertainties.”"
+            },
+            {
+              "id": "B",
+              "text": "“Compare pay, hours, career growth, and lifestyle before recommending an option.”"
+            },
+            {
+              "id": "C",
+              "text": "“Ask which two factors matter most before drawing a conclusion.”"
+            }
+          ]
+        },
+        {
+          "id": "S4-06",
+          "subsection": "Money and purchases",
+          "measure": "purchase_analysis_focus",
+          "source": "money/subscription",
+          "situation": "You are considering a monthly subscription that seems inexpensive.",
+          "question": "Which response or approach would you prefer?",
+          "type": "single",
+          "choices": [
+            {
+              "id": "A",
+              "text": "“Calculate the annual cost and compare it with the benefit.”"
+            },
+            {
+              "id": "B",
+              "text": "“Check whether I will use it enough to justify keeping it.”"
+            },
+            {
+              "id": "C",
+              "text": "“Focus on cancellation rules, alternatives, and what the subscription replaces.”"
+            }
+          ]
+        },
+        {
+          "id": "S4-07",
+          "subsection": "Taking action for you",
+          "measure": "action_preparation_workflow",
+          "source": "action/sendmessage",
+          "situation": "You ask an assistant with email tools to help you send a non-urgent email, but have not specified the recipient. Sending will require your explicit approval.",
+          "question": "Which response or approach would you prefer?",
+          "type": "single",
+          "choices": [
+            {
+              "id": "A",
+              "text": "“Draft a neutral email now, then confirm the recipient, content, and approval before sending.”"
+            },
+            {
+              "id": "B",
+              "text": "“Ask for the recipient and desired outcome first, then draft and request approval before sending.”"
+            },
+            {
+              "id": "C",
+              "text": "“Prepare two draft styles and a short pre-send checklist, then ask me to approve the final action.”"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage-5",
+      "title": "Stage 5 — Personal Context & Boundaries",
+      "description": "How the assistant handles feelings, relationships, high-stakes matters, and memory.",
+      "questions": [
+        {
+          "id": "S5-01",
+          "subsection": "Feelings and difficult days",
+          "measure": "emotional_support_mode",
+          "source": "feelings/listening",
+          "situation": "You say: “I just need to get this off my chest.”",
+          "question": "Which response or approach would you prefer?",
+          "type": "single",
+          "choices": [
+            {
+              "id": "A",
+              "text": "“Invite me to continue, without giving advice unless I ask.”"
+            },
+            {
+              "id": "B",
+              "text": "“Reflect the main feeling briefly, then ask one open question.”"
+            },
+            {
+              "id": "C",
+              "text": "“Offer to listen or help me think through next steps, and let me choose.”"
+            }
+          ]
+        },
+        {
+          "id": "S5-02",
+          "subsection": "Relationships and family",
+          "measure": "interpersonal_uncertainty",
+          "source": "relationships/frienddelay",
+          "situation": "A friend has not replied for several days, and you wonder if they are upset with you.",
+          "question": "Which response or approach would you prefer?",
+          "type": "single",
+          "choices": [
+            {
+              "id": "A",
+              "text": "“Explain that the delay does not establish their reason, then suggest a low-pressure check-in.”"
+            },
+            {
+              "id": "B",
+              "text": "“Ask whether this is unusual for that person before giving advice.”"
+            },
+            {
+              "id": "C",
+              "text": "“Lay out a few plausible explanations and a calm next step, without treating any guess as fact.”"
+            }
+          ]
+        },
+        {
+          "id": "S5-03",
+          "subsection": "Health and urgent situations",
+          "measure": "high_stakes_response_format",
+          "source": "health/generalhealth",
+          "situation": "You ask about a non-urgent symptom, but the information you provide cannot support a diagnosis.",
+          "question": "Which response or approach would you prefer?",
+          "type": "single",
+          "choices": [
+            {
+              "id": "A",
+              "text": "“Give general possibilities and clearly state the warning signs that need medical attention.”"
+            },
+            {
+              "id": "B",
+              "text": "“Ask the few relevant clarifying questions before discussing possibilities and warning signs.”"
+            },
+            {
+              "id": "C",
+              "text": "“Give a brief plan for what to observe, what to avoid assuming, and when to seek medical advice.”"
+            }
+          ]
+        },
+        {
+          "id": "S5-04",
+          "subsection": "Privacy and remembering you",
+          "measure": "context_reuse_visibility",
+          "source": "privacy/rememberuse",
+          "situation": "The assistant has access to an earlier non-sensitive preference that is relevant to your question.",
+          "question": "Which response or approach would you prefer?",
+          "type": "single",
+          "choices": [
+            {
+              "id": "A",
+              "text": "“Apply the preference quietly when it clearly improves the answer.”"
+            },
+            {
+              "id": "B",
+              "text": "“Mention briefly which earlier preference is being used.”"
+            },
+            {
+              "id": "C",
+              "text": "“Ask whether I want the earlier preference applied before personalizing the answer.”"
+            }
+          ]
+        },
+        {
+          "id": "S5-05",
+          "subsection": "Privacy and remembering you",
+          "measure": "sensitive_context_control",
+          "source": "privacy/sensitive",
+          "situation": "A previous conversation contains sensitive personal information that might help tailor this answer.",
+          "question": "Which response or approach would you prefer?",
+          "type": "single",
+          "choices": [
+            {
+              "id": "A",
+              "text": "“Answer generally unless I explicitly make that sensitive detail relevant.”"
+            },
+            {
+              "id": "B",
+              "text": "“Ask for permission before using the sensitive detail for this task.”"
+            },
+            {
+              "id": "C",
+              "text": "“Offer a general and a personalized approach without exposing the sensitive detail.”"
+            }
+          ]
+        },
+        {
+          "id": "S5-06",
+          "subsection": "Privacy and remembering you",
+          "measure": "preference_update_scope",
+          "source": "privacy/guessingtraits + mistakes/feedbackscope",
+          "situation": "You tell the assistant: “That answer was too long.” You have not said whether this is a lasting preference.",
+          "question": "Which response or approach would you prefer?",
+          "type": "single",
+          "choices": [
+            {
+              "id": "A",
+              "text": "“Shorten this answer only; do not assume my general preferences have changed.”"
+            },
+            {
+              "id": "B",
+              "text": "“Ask whether I want shorter answers in general or only for this situation.”"
+            },
+            {
+              "id": "C",
+              "text": "“Shorten the answer immediately and offer an explicit option to update my ongoing profile.”"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage-6",
+      "title": "Stage 6 — Writing, Creativity & Adaptation",
+      "description": "How the assistant should preserve voice, generate ideas, and honor temporary instructions.",
+      "questions": [
+        {
+          "id": "S6-01",
+          "subsection": "Writing messages",
+          "measure": "voice_preservation",
+          "source": "writing/personalvoice",
+          "situation": "You share a rough personal message with distinctive wording and ask the assistant to improve it.",
+          "question": "Which response or approach would you prefer?",
+          "type": "single",
+          "choices": [
+            {
+              "id": "A",
+              "text": "“Correct grammar and clarity while preserving nearly all of my phrasing.”"
+            },
+            {
+              "id": "B",
+              "text": "“Make the message substantially smoother but retain its personality and meaning.”"
+            },
+            {
+              "id": "C",
+              "text": "“Show a light edit and a polished version so I can choose.”"
+            }
+          ]
+        },
+        {
+          "id": "S6-02",
+          "subsection": "Writing messages",
+          "measure": "professional_draft_tone",
+          "source": "writing/tonechoice",
+          "situation": "You need to follow up with a colleague about figures required by Thursday.",
+          "question": "Which response or approach would you prefer?",
+          "type": "single",
+          "choices": [
+            {
+              "id": "A",
+              "text": "“Could you send the figures by Thursday? I need them to finish the report. Thanks.”"
+            },
+            {
+              "id": "B",
+              "text": "“Just following up on the figures. Would Thursday be possible? I need them for the report. Thanks.”"
+            },
+            {
+              "id": "C",
+              "text": "“Please send the figures by Thursday so I can complete the report on schedule. Thank you.”"
+            }
+          ]
+        },
+        {
+          "id": "S6-03",
+          "subsection": "Ideas and creativity",
+          "measure": "idea_generation_width",
+          "source": "creativity/manyideas",
+          "situation": "You ask the assistant to suggest names for a new community project.",
+          "question": "Which response or approach would you prefer?",
+          "type": "single",
+          "choices": [
+            {
+              "id": "A",
+              "text": "“Give five carefully selected names with different styles.”"
+            },
+            {
+              "id": "B",
+              "text": "“Generate a broad list of about fifteen names, then suggest how to narrow it.”"
+            },
+            {
+              "id": "C",
+              "text": "“Develop three names in depth, explaining their tone, strengths, and use cases.”"
+            }
+          ]
+        },
+        {
+          "id": "S6-04",
+          "subsection": "Ideas and creativity",
+          "measure": "brainstorm_criticism_timing",
+          "source": "creativity/judgment",
+          "situation": "During brainstorming, you suggest an unconventional idea that may be hard to implement.",
+          "question": "Which response or approach would you prefer?",
+          "type": "single",
+          "choices": [
+            {
+              "id": "A",
+              "text": "“Explore the idea fully before evaluating feasibility.”"
+            },
+            {
+              "id": "B",
+              "text": "“Develop the interesting part while flagging one important implementation concern.”"
+            },
+            {
+              "id": "C",
+              "text": "“Ask whether I want open-ended ideation or a feasibility critique at this point.”"
+            }
+          ]
+        },
+        {
+          "id": "S6-05",
+          "subsection": "Different needs in different moments",
+          "measure": "temporary_instruction_priority",
+          "source": "moments/changedmind",
+          "situation": "You usually prefer detailed answers, but now say: “I’m in a hurry. Keep it simple.”",
+          "question": "Which response or approach would you prefer?",
+          "type": "single",
+          "choices": [
+            {
+              "id": "A",
+              "text": "“Give the direct answer in one or two sentences.”"
+            },
+            {
+              "id": "B",
+              "text": "“Give no more than three practical bullet points.”"
+            },
+            {
+              "id": "C",
+              "text": "“Give a brief answer and include one important caveat only if it changes the action.”"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

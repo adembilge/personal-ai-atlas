@@ -67,7 +67,7 @@ test("Unavailable storage keeps the questionnaire usable and asks for a backup",
     },
   });
   vm.runInContext(
-    "profile.answers['everyday.greeting']={status:'choice',choiceId:'reply-1'};save()",
+    "profile.answers['roles']={status:'choice',choiceIds:['choice-1']};save()",
     app.context,
   );
   assert.equal(
@@ -75,7 +75,7 @@ test("Unavailable storage keeps the questionnaire usable and asks for a backup",
     1,
   );
   assert.match(app.element("save-status").textContent, /Download a backup/);
-  assert.deepEqual(calls, ["personal-ai-atlas:answers:2"]);
+  assert.deepEqual(calls, ["my-kind-of-ai:answers:3"]);
 });
 
 test("Unreadable saved data is not overwritten and current answers can still be exported", () => {
@@ -89,7 +89,7 @@ test("Unreadable saved data is not overwritten and current answers can still be 
     },
   });
   vm.runInContext(
-    "profile.answers['everyday.greeting']={status:'unsure'};save()",
+    "profile.answers['roles']={status:'unsure'};save()",
     app.context,
   );
   assert.equal(writes, 0);
@@ -98,4 +98,10 @@ test("Unreadable saved data is not overwritten and current answers can still be 
     1,
   );
   assert.match(app.element("save-status").textContent, /Download a backup/);
+});
+
+test("Old answers are removed while current answers remain separate", () => {
+  const values = new Map([["personal-ai-atlas:answers:2", "old answers"]]);
+  start({getItem:key => values.get(key) || null, setItem:(key,value) => values.set(key,value), removeItem:key => values.delete(key)});
+  assert.equal(values.has("personal-ai-atlas:answers:2"), false);
 });

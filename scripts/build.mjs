@@ -3,32 +3,8 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { QUESTIONNAIRE_VERSION, validateBank } from "../src/model.mjs";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const sections = [];
-let current;
-for (const line of fs
-  .readFileSync(path.join(root, "questions.txt"), "utf8")
-  .split(/\r?\n/)
-  .filter(Boolean)) {
-  if (line.startsWith("## ")) {
-    const [id, title, count, description] = line.slice(3).split("|");
-    current = { id, title, count: Number(count), description, questions: [] };
-    sections.push(current);
-  } else {
-    const [key, situation, replies] = line.split("|");
-    if (!current || !replies) throw Error("Malformed question: " + line);
-    current.questions.push({
-      id: current.id + "." + key,
-      situation,
-      choices: replies
-        .split("~")
-        .map((text, i) => ({ id: "reply-" + (i + 1), text })),
-    });
-  }
-}
-for (const s of sections)
-  if (s.count !== s.questions.length)
-    throw Error("Incorrect count for " + s.id);
-const bank = validateBank({ version: QUESTIONNAIRE_VERSION, sections });
+const bank = validateBank(JSON.parse(fs.readFileSync(path.join(root, "questions.json"), "utf8")));
+const sections = bank.sections;
 const dist = path.join(root, "dist");
 fs.mkdirSync(dist, { recursive: true });
 const model = fs
@@ -67,17 +43,17 @@ fs.writeFileSync(
 );
 let count = 0;
 const reference = [
-  "# Personal AI Atlas — all questions",
+  "# My Kind of AI — all questions",
   "",
-  `280 everyday situations in 24 sections. Questionnaire ${bank.version}.`,
+  `48 questions in 6 stages. Questionnaire ${bank.version}.`,
   "",
   ...sections.flatMap((s) => [
     "## " + s.title,
     "",
     ...s.questions.flatMap((q) => [
-      "### " + String(++count).padStart(3, "0") + ". " + q.situation,
+      "### " + (q.number || q.id) + " — " + q.subsection + "\n\n" + q.situation,
       "",
-      "Which reply would you prefer?",
+      q.question,
       "",
       ...q.choices.map((c) => "- " + c.text),
       "",
@@ -109,5 +85,5 @@ const offline = html
   );
 fs.writeFileSync(path.join(dist, "Personal-AI-Atlas-offline.html"), offline);
 console.log(
-  "Built 280 questions, 24 sections, the website, offline copy, and question reference.",
+  "Built 48 questions, 6 stages, the website, offline copy, and question reference.",
 );

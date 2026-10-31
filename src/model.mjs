@@ -1,5 +1,5 @@
-export const QUESTIONNAIRE_VERSION = "2.0.0";
-export const FORMAT_VERSION = 2;
+export const QUESTIONNAIRE_VERSION = "3.0.0";
+export const FORMAT_VERSION = 3;
 export const STATUS_LABELS = Object.freeze({
   choice: "Chosen reply",
   unsure: "Not sure",
@@ -7,20 +7,17 @@ export const STATUS_LABELS = Object.freeze({
   not_applicable: "Does not apply",
   written: "My own answer",
 });
-export const EXPECTED_COUNTS = [
-  11, 9, 7, 9, 12, 9, 12, 12, 14, 14, 16, 14, 14, 11, 11, 12, 9, 12, 12, 12, 12,
-  12, 10, 14,
-];
+export const EXPECTED_COUNTS = [17, 6, 7, 7, 6, 5];
 export function allQuestions(bank) {
   return bank.sections.flatMap((section) => section.questions);
 }
 export function validateBank(bank) {
-  if (bank.version !== QUESTIONNAIRE_VERSION || bank.sections.length !== 24)
+  if (bank.version !== QUESTIONNAIRE_VERSION || bank.sections.length !== 6)
     throw Error("The questionnaire is incomplete.");
   const questions = allQuestions(bank),
     ids = new Set(),
     prompts = new Set();
-  if (questions.length !== 280) throw Error("Expected 280 questions.");
+  if (questions.length !== 48) throw Error("Expected 48 questions.");
   bank.sections.forEach((section, index) => {
     if (section.questions.length !== EXPECTED_COUNTS[index])
       throw Error("Unexpected section length: " + section.id);
@@ -31,8 +28,9 @@ export function validateBank(bank) {
       prompts.add(question.situation);
       if (
         !question.situation ||
+        !["single", "multi"].includes(question.type) ||
         question.choices.length < 3 ||
-        question.choices.length > 4 ||
+        question.choices.length > 10 ||
         new Set(question.choices.map((c) => c.text)).size !==
           question.choices.length
       )
@@ -120,13 +118,13 @@ export function validateProfile(bank, input) {
       !Object.hasOwn(STATUS_LABELS, answer.status)
     )
       throw Error("The file contains an answer that cannot be restored.");
-    if (
-      answer.status === "choice" &&
-      !q.choices.some((c) => c.id === answer.choiceId)
-    )
-      throw Error("The file contains an unrecognized reply.");
-    if (answer.status !== "choice" && answer.choiceId)
+    if (answer.status === "choice") {
+      const ids = q.type === "multi" ? answer.choiceIds : [answer.choiceId];
+      if (!Array.isArray(ids) || !ids.length || new Set(ids).size !== ids.length || ids.some(id => !q.choices.some(c => c.id === id)) || (q.type === "multi" ? answer.choiceId !== undefined : answer.choiceIds !== undefined))
+        throw Error("The file contains an unrecognized reply.");
+    } else if (answer.choiceId !== undefined || answer.choiceIds !== undefined) {
       throw Error("The file contains a conflicting answer.");
+    }
     if (
       answer.text !== undefined &&
       (typeof answer.text !== "string" || answer.text.length > 3000)
@@ -136,7 +134,7 @@ export function validateProfile(bank, input) {
       throw Error("The file contains a note without a written answer.");
     clean.answers[id] = {
       status: answer.status,
-      ...(answer.status === "choice" ? { choiceId: answer.choiceId } : {}),
+      ...(answer.status === "choice" ? (q.type === "multi" ? { choiceIds: [...answer.choiceIds] } : { choiceId: answer.choiceId }) : {}),
       ...(answer.status === "written" ? { text: answer.text || "" } : {}),
     };
   }
@@ -146,7 +144,7 @@ export function validateProfile(bank, input) {
 export function readSavedFile(bank, file) {
   if (
     !file ||
-    !["personal-ai-atlas/backup", "personal-ai-atlas/results"].includes(
+    !["my-kind-of-ai/backup", "my-kind-of-ai/results"].includes(
       file.format,
     ) ||
     file.formatVersion !== FORMAT_VERSION ||
@@ -157,18 +155,17 @@ export function readSavedFile(bank, file) {
 }
 export function responseText(question, answer) {
   if (!answer) return "Unanswered";
-  if (answer.status === "choice")
-    return (
-      question.choices.find((c) => c.id === answer.choiceId)?.text ||
-      "Unanswered"
-    );
+  if (answer.status === "choice") {
+    const ids = question.type === "multi" ? answer.choiceIds : [answer.choiceId];
+    return question.choices.filter(c => ids.includes(c.id)).map(c => c.text).join("; ") || "Unanswered";
+  }
   if (answer.status === "written")
     return answer.text?.trim() || "Written answer not finished";
   return STATUS_LABELS[answer.status] || "Unanswered";
 }
 export function backupFile(bank, profile, stamp = new Date().toISOString()) {
   return {
-    format: "personal-ai-atlas/backup",
+    format: "my-kind-of-ai/backup",
     formatVersion: FORMAT_VERSION,
     questionnaireVersion: bank.version,
     exportedAt: stamp,
@@ -178,7 +175,7 @@ export function backupFile(bank, profile, stamp = new Date().toISOString()) {
 export function resultsFile(bank, profile, stamp = new Date().toISOString()) {
   const snapshot = validateProfile(bank, profile);
   return {
-    format: "personal-ai-atlas/results",
+    format: "my-kind-of-ai/results",
     formatVersion: FORMAT_VERSION,
     questionnaireVersion: bank.version,
     exportedAt: stamp,
@@ -189,8 +186,13 @@ export function resultsFile(bank, profile, stamp = new Date().toISOString()) {
       title: section.title,
       questions: section.questions.map((q) => ({
         id: q.id,
+        number: q.number,
+        subsection: q.subsection,
+        measure: q.measure,
+        source: q.source,
+        type: q.type,
         situation: q.situation,
-        question: "Which reply would you prefer?",
+        question: q.question,
         choices: q.choices,
         response: snapshot.answers[q.id] || { status: "unanswered" },
         responseText: responseText(q, snapshot.answers[q.id]),
@@ -198,7 +200,7 @@ export function resultsFile(bank, profile, stamp = new Date().toISOString()) {
     })),
     guidanceForPersonalization: {
       purpose:
-        "Use the selected example replies as evidence of communication preferences. This is not a personality test.",
+        "Use baseline selections and scenario responses as evidence of communication preferences. This is not a personality test.",
       instructions: [
         "Create a detailed Personal AI Operating Protocol and compact ChatGPT Custom Instructions with character counts.",
         "Organize stable preferences and situation-specific behavior without adding a mode-configuration burden for the user.",
@@ -217,7 +219,7 @@ export function resultsFile(bank, profile, stamp = new Date().toISOString()) {
 export function readableReport(bank, profile) {
   const p = progress(bank, profile);
   return [
-    "# My Personal AI Atlas answers",
+    "# My Kind of AI answers",
     "",
     `${p.recorded} of ${p.total} questions answered.`,
     "",
@@ -227,7 +229,11 @@ export function readableReport(bank, profile) {
       "## " + section.title,
       "",
       ...section.questions.flatMap((q) => [
-        "### " + q.situation,
+        "### " + (q.number || q.id) + " — " + q.subsection,
+        "",
+        q.situation,
+        "",
+        q.question,
         "",
         responseText(q, profile.answers[q.id]),
         "",

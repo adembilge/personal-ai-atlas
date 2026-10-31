@@ -1,7 +1,20 @@
 const QUESTIONS = allQuestions(BANK);
 const QUESTION_MAP = new Map(QUESTIONS.map((q) => [q.id, q]));
-const STORAGE_KEY = "personal-ai-atlas:answers:2";
+const STORAGE_KEY = "my-kind-of-ai:answers:3";
+try { localStorage.removeItem("personal-ai-atlas:answers:2"); } catch { /* Storage may be unavailable. */ }
 const main = document.getElementById("main");
+const FIELD_CONTOURS = `<svg class="field-contours" viewBox="0 0 560 520" fill="none" aria-hidden="true" focusable="false">
+  <g stroke="currentColor" stroke-width="1">
+    <path d="M-30 144C55 154 51 35 166 39s82 93 190 60 195 4 224 65"/>
+    <path d="M-30 164C63 179 68 57 168 61s85 96 197 61 182 3 215 65"/>
+    <path d="M-30 187C76 199 86 79 171 83s91 99 202 62 174 3 207 66"/>
+    <path d="M-30 210C85 218 100 103 174 106s91 104 206 64 162 8 200 65"/>
+    <path d="M-20 382C76 337 115 468 223 452s100-87 202-61 138-15 155-34"/>
+    <path d="M-20 405C70 360 119 491 227 475s101-88 202-63 133-12 151-29"/>
+    <path d="M-20 428C67 384 121 515 232 499s100-92 204-64 124-10 144-26"/>
+    <path d="M-20 451C63 408 125 540 237 523s100-94 206-64 115-6 137-26"/>
+  </g>
+</svg>`;
 let profile = freshProfile(BANK),
   canSave = true,
   saveProblem = "",
@@ -98,7 +111,7 @@ function datedName(kind, extension) {
       String(date.getMonth() + 1).padStart(2, "0"),
       String(date.getDate()).padStart(2, "0"),
     ].join("-");
-  return "personal-ai-atlas-" + kind + "-" + day + "." + extension;
+  return "my-kind-of-ai-" + kind + "-" + day + "." + extension;
 }
 function downloadBackup() {
   downloadFile(
@@ -142,9 +155,9 @@ function progressLine() {
 function homeScreen() {
   const p = progress(BANK, profile);
   main.innerHTML =
-    '<section class="hero"><div class="hero-copy"><span class="eyebrow">Replies that feel like you</span><h1>Make your AI<br>a little more you.</h1><p class="intro">Good news, a difficult day, a quick question. Choose the replies that feel right to you, one everyday situation at a time.</p><div class="button-row"><button type="button" class="primary" id="begin">' +
+    '<section class="hero"><div class="hero-copy"><span class="eyebrow">Replies that feel like you</span><h1>Make your AI<br>a little more you.</h1><p class="intro">Good news, a difficult day, a quick question. Explore your preferences and choose the responses that feel right to you.</p><div class="button-row"><button type="button" class="primary" id="begin">' +
     (p.recorded ? "Continue my questions" : "Let’s get started") +
-    ' <span aria-hidden="true">→</span></button><a class="plain-link" href="#/questions">Explore the topics</a></div><p class="gentle">No right answers. No need to finish in one sitting.</p></div><div class="sample-card" aria-label="An example question"><div class="sample-top"><span class="sample-dot"></span>Try a familiar moment</div><p class="sample-situation">You say, “I passed a difficult exam.”</p><p class="sample-question">Which reply feels closest?</p><div class="sample-reply"><span aria-hidden="true"></span>“Well done. What comes next?”</div><div class="sample-reply"><span aria-hidden="true"></span>“That is a real achievement after all that work.”</div><div class="sample-reply"><span aria-hidden="true"></span>“Great news! Take a moment to enjoy it.”</div><p class="sample-note">Just an example. Your answers start when you do.</p></div></section><section class="home-summary" aria-label="About the questionnaire"><div><strong>280</strong><span>everyday situations</span></div><div><strong>24</strong><span>familiar topics</span></div><div><strong>Your pace</strong><span>save and return anytime</span></div></section><section class="how"><div><span class="eyebrow">Choose a reply</span><h2>Pick the reply you prefer.</h2><p>Read a short situation and compare the replies. If none feels right, you can write your own or leave it unanswered.</p></div><div><span class="eyebrow">Go at your pace</span><h2>A few questions is a start.</h2><p>Move between topics or come back another day. Your answers save in this browser. A backup lets you move to another device.</p></div><div><span class="eyebrow">Put it to use</span><h2>Bring your answers to ChatGPT.</h2><p>Download your results and share the file in a chat. Ask for instructions that help the AI answer in a way that suits you.</p></div></section>' +
+    ' <span aria-hidden="true">→</span></button><a class="plain-link" href="#/questions">Explore the topics</a></div><p class="gentle">No right answers. No need to finish in one sitting.</p></div><div class="sample-wrap">' + FIELD_CONTOURS + '<div class="sample-card" aria-label="An example question"><div class="sample-top"><span class="sample-dot"></span>Try a familiar moment</div><p class="sample-situation">You tell the assistant: “I got the job!”</p><p class="sample-question">Which reply feels closest?</p><div class="sample-reply"><span aria-hidden="true"></span>“Congratulations. That is a significant result.”</div><div class="sample-reply"><span aria-hidden="true"></span>“Well done. When do you start?”</div><div class="sample-reply"><span aria-hidden="true"></span>“Congratulations. Enjoy the moment; we can deal with preparations whenever you are ready.”</div><p class="sample-note">Just an example. Your answers start when you do.</p></div></div></section><section class="home-summary" aria-label="About the questionnaire"><div><strong>48</strong><span>questions</span></div><div><strong>6</strong><span>stages</span></div><div><strong>Your pace</strong><span>save and return anytime</span></div></section><section class="how"><div><span class="eyebrow">Choose a reply</span><h2>Pick the reply you prefer.</h2><p>Choose your preferences and compare responses to everyday situations. If none feels right, you can write your own or leave it unanswered.</p></div><div><span class="eyebrow">Go at your pace</span><h2>A few questions is a start.</h2><p>Move between topics or come back another day. Your answers save in this browser. A backup lets you move to another device.</p></div><div><span class="eyebrow">Put it to use</span><h2>Bring your answers to ChatGPT.</h2><p>Download your results and share the file in a chat. Ask for instructions that help the AI answer in a way that suits you.</p></div></section>' +
     (p.recorded
       ? '<section class="resume-panel"><div><h2>Your answers are waiting.</h2>' +
         progressLine() +
@@ -246,7 +259,7 @@ function questionScreen(id) {
   profile.lastQuestion = q.id;
   save();
   main.innerHTML =
-    '<div class="question-layout"><aside class="question-aside"><a class="plain-link" href="#/questions">← All topics</a><span class="eyebrow">Topic ' +
+    '<div class="question-layout"><aside class="question-aside"><a class="plain-link" href="#/questions">← All topics</a><span class="eyebrow">Stage ' +
     String(BANK.sections.indexOf(section) + 1).padStart(2, "0") +
     "</span><h1>" +
     escapeHTML(section.title) +
@@ -266,23 +279,23 @@ function questionScreen(id) {
     (index + 1) +
     " / " +
     QUESTIONS.length +
-    "</span></div><h2>" +
+    '</span></div><p class="eyebrow">' + escapeHTML((q.number || q.id) + " · " + q.subsection) + "</p><h2>" +
     escapeHTML(q.situation) +
-    '</h2><fieldset class="reply-list"><legend>Which reply would you prefer?</legend>' +
+    '</h2><fieldset class="reply-list"><legend>' + escapeHTML(q.question) + '</legend>' +
     q.choices
       .map(
         (c, i) =>
-          '<label class="reply"><input type="radio" name="reply" value="' +
+          '<label class="reply"><input type="' + (q.type === "multi" ? "checkbox" : "radio") + '" name="reply" value="' +
           c.id +
           '" ' +
-          (answer?.status === "choice" && answer.choiceId === c.id
+          (answer?.status === "choice" && (q.type === "multi" ? answer.choiceIds.includes(c.id) : answer.choiceId === c.id)
             ? "checked"
             : "") +
           '><span class="reply-letter" aria-hidden="true">' +
           String.fromCharCode(65 + i) +
-          '</span><span class="reply-text">“' +
+          '</span><span class="reply-text">' +
           escapeHTML(c.text) +
-          '”</span><svg class="reply-check" viewBox="0 0 20 20" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg></label>',
+          '</span><svg class="reply-check" viewBox="0 0 20 20" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg></label>',
       )
       .join("") +
     '<div class="other-replies">' +
@@ -319,15 +332,18 @@ function questionScreen(id) {
   document.querySelectorAll('input[name="reply"]').forEach(
     (input) =>
       (input.onchange = () => {
-        if (q.choices.some((c) => c.id === input.value))
-          profile.answers[q.id] = { status: "choice", choiceId: input.value };
-        else
-          profile.answers[q.id] = {
-            status: input.value,
-            ...(input.value === "written"
-              ? { text: document.getElementById("own-answer").value }
-              : {}),
-          };
+        const inputs = [...document.querySelectorAll('input[name="reply"]')];
+        if (q.choices.some(c => c.id === input.value)) {
+          inputs.filter(el => !q.choices.some(c => c.id === el.value)).forEach(el => el.checked = false);
+          if (q.type === "multi") {
+            const choiceIds = q.choices.filter(c => inputs.some(el => el.value === c.id && el.checked)).map(c => c.id);
+            if (choiceIds.length) profile.answers[q.id] = { status: "choice", choiceIds };
+            else delete profile.answers[q.id];
+          } else profile.answers[q.id] = { status: "choice", choiceId: input.value };
+        } else {
+          inputs.filter(el => q.choices.some(c => c.id === el.value)).forEach(el => el.checked = false);
+          profile.answers[q.id] = { status: input.value, ...(input.value === "written" ? { text: document.getElementById("own-answer").value } : {}) };
+        }
         document.getElementById("written-answer").hidden =
           input.value !== "written";
         save();

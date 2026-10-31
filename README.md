@@ -1,21 +1,21 @@
-# Personal AI Atlas
+# My Kind of AI
 
 **Choose the replies that feel right to you.**
 
-Personal AI Atlas helps you explain how you would like an AI assistant to answer. Instead of asking you to describe your preferences from scratch, it shows familiar situations and a few short example replies.
+My Kind of AI helps you explain how you would like an AI assistant to answer. Instead of asking you to describe your preferences from scratch, it shows familiar situations and a few short example replies.
 
 You might be sharing good news, choosing something to buy, asking for a simpler explanation, or having a difficult day. Pick the reply you would prefer.
 
 ## Try it
 
-[Open Personal AI Atlas](https://adembilge.github.io/personal-ai-atlas/)
+[Open My Kind of AI](https://adembilge.github.io/personal-ai-atlas/)
 
-There are **280 situations across 24 topics**. There are no right answers, and you do not need to finish in one sitting.
+There are **48 questions across six stages**: a quick baseline followed by scenario calibration. There are no right answers, and you do not need to finish in one sitting.
 
 ## How to answer
 
-1. Choose any topic, or start at the beginning.
-2. Read the situation and select the reply you prefer.
+1. Choose any stage, or start at the beginning.
+2. Answer the baseline questions, then choose one response for each scenario. Some baseline questions allow multiple selections.
 3. If needed, choose **Not sure**, **No preference**, **This doesn’t apply to me**, or write your own answer.
 4. Continue at your own pace. You can leave a question unanswered and change your answers later.
 
@@ -56,7 +56,3 @@ Your responses stay in your browser. The application does not send them to an AI
 Downloaded files contain your answers and anything you wrote. You decide whether and where to share them.
 
 This is a tool for exploring preferences, not a personality test or a promise of perfect AI answers.
-
-## Original question list
-
-The [original questions and answer choices](archive/questionnaire-v1-questions.md) are kept as a separate reading reference. They are not part of the application.
